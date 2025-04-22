@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psychologists-table
+      author: MishaHMK
+      changes:
+        - createTable:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: father_name
+                  type: varchar(255)
+              - column:
+                  name: introduction
+                  type: varchar(512)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+              - column:
+                  name: gender
+                  type: enum('FEMALE', 'MALE', 'OTHER')
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speciality_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+              - addForeignKeyConstraint:
+                  baseColumnNames: speciality_id
+                  baseTableName: psychologists
+                  constraintName: fk_psychologists_specialities
+                  referencedColumnNames: id
+                  referencedTableName: specialities
