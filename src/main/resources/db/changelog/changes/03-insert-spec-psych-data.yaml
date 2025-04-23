@@ -1,0 +1,112 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-spec-psych-data
+      author: bookstore
+      changes:
+        - insert:
+            tableName: specialities
+            columns:
+              - column:
+                  name: name
+                  value: "PTSD"
+
+        - insert:
+            tableName: specialities
+            columns:
+              - column:
+                  name: name
+                  value: "Depression"
+
+
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Bob"
+              - column:
+                  name: last_name
+                  value: "Doe"
+              - column:
+                  name: father_name
+                  value: "John"
+              - column:
+                  name: introduction
+                  value: "Some intro data"
+              - column:
+                  name: email
+                  value: "bob.doe@gmail.com"
+              - column:
+                  name: phone_number
+                  value: "0661212122"
+              - column:
+                  name: session_price
+                  value: '9.99'
+              - column:
+                  name: gender
+                  value: 'MALE'
+              - column:
+                  name: speciality_id
+                  value: '1'
+
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Jane"
+              - column:
+                  name: last_name
+                  value: "Foster"
+              - column:
+                  name: father_name
+                  value: "Maggie"
+              - column:
+                  name: introduction
+                  value: "Some other intro data"
+              - column:
+                  name: email
+                  value: "jane.foster@gmail.com"
+              - column:
+                  name: phone_number
+                  value: "0661212123"
+              - column:
+                  name: session_price
+                  value: '8.99'
+              - column:
+                  name: gender
+                  value: 'FEMALE'
+              - column:
+                  name: speciality_id
+                  value: '2'
+
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Mary"
+              - column:
+                  name: last_name
+                  value: "Graham"
+              - column:
+                  name: father_name
+                  value: "Lise"
+              - column:
+                  name: introduction
+                  value: "Some more intro data"
+              - column:
+                  name: email
+                  value: "mary.graham@gmail.com"
+              - column:
+                  name: phone_number
+                  value: "0661212124"
+              - column:
+                  name: session_price
+                  value: '9.99'
+              - column:
+                  name: gender
+                  value: 'FEMALE'
+              - column:
+                  name: speciality_id
+                  value: '1'
