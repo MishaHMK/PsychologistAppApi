@@ -32,9 +32,13 @@ databaseChangeLog:
               - column:
                   name: email
                   type: varchar(255)
+                  constraints:
+                    unique: true
               - column:
                   name: phone_number
                   type: varchar(255)
+                  constraints:
+                    unique: true
               - column:
                   name: gender
                   type: enum('FEMALE', 'MALE', 'OTHER')
@@ -43,6 +47,11 @@ databaseChangeLog:
               - column:
                   name: speciality_id
                   type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_price
+                  type: decimal(11,2)
                   constraints:
                     nullable: false
               - column:

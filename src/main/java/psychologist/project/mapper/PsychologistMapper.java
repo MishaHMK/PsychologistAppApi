@@ -7,20 +7,17 @@ import org.mapstruct.Named;
 import psychologist.project.config.MapperConfig;
 import psychologist.project.dto.CreatePsychologistDto;
 import psychologist.project.dto.PsychologistDto;
-import psychologist.project.dto.UpdatePsychologistDto;
 import psychologist.project.model.Psychologist;
 import psychologist.project.model.Speciality;
 
 @Mapper(config = MapperConfig.class)
 public interface PsychologistMapper {
     @Mapping(source = "specialityId", target = "speciality", qualifiedByName = "specialityFromId")
+    @Mapping(target = "sessionPrice", source = "sessionPrice")
     Psychologist toEntity(CreatePsychologistDto createDto);
 
+    @Mapping(target = "sessionPrice", source = "sessionPrice")
     PsychologistDto toDto(Psychologist dto);
-
-    @Mapping(source = "specialityId", target = "speciality", qualifiedByName = "specialityFromId")
-    void updateFromDto(UpdatePsychologistDto dto,
-                       @MappingTarget Psychologist psychologist);
 
     @Named("specialityFromId")
     default Speciality specialityFromId(Long id) {

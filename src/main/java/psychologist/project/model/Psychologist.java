@@ -19,6 +19,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -45,6 +47,9 @@ public class Psychologist {
     private String email;
 
     private String introduction;
+
+    @Column(nullable = false)
+    private BigDecimal sessionPrice;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

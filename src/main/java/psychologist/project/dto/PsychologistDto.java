@@ -4,9 +4,12 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import psychologist.project.model.Speciality;
 
+import java.math.BigDecimal;
+
 @Data
 @Accessors(chain = true)
 public class PsychologistDto {
+    private Long id;
     private String firstName;
     private String lastName;
     private String fatherName;
@@ -14,5 +17,6 @@ public class PsychologistDto {
     private String email;
     private String introduction;
     private Speciality speciality;
+    private BigDecimal sessionPrice;
     private String gender;
 }
