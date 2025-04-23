@@ -1,15 +1,13 @@
 package psychologist.project.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import psychologist.project.annotations.UniqueValue;
 import psychologist.project.model.Psychologist;
-
-import java.math.BigDecimal;
 
 @Data
 @Accessors(chain = true)

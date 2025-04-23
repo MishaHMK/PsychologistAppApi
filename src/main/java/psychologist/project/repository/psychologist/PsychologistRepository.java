@@ -1,5 +1,6 @@
 package psychologist.project.repository.psychologist;
 
+import java.util.Optional;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,9 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.lang.Nullable;
 import psychologist.project.model.Psychologist;
-import psychologist.project.model.Speciality;
-
-import java.util.Optional;
 
 public interface PsychologistRepository
         extends JpaRepository<Psychologist, Long>,

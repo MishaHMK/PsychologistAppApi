@@ -1,10 +1,9 @@
 package psychologist.project.dto;
 
+import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import psychologist.project.model.Speciality;
-
-import java.math.BigDecimal;
 
 @Data
 @Accessors(chain = true)

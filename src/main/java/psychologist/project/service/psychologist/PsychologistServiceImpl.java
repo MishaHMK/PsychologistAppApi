@@ -1,8 +1,9 @@
 package psychologist.project.service.psychologist;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,6 @@ import psychologist.project.model.Speciality;
 import psychologist.project.repository.psychologist.PsychologistRepository;
 import psychologist.project.repository.psychologist.PsychologistSpecification;
 import psychologist.project.repository.psychologist.SpecialityRepository;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 @Transactional
@@ -62,31 +60,35 @@ public class PsychologistServiceImpl implements PsychologistService {
     public List<PsychologistDto> search(PsychologistFilterDto filterDto,
                                         Pageable pageable) {
         Specification<Psychologist> spec = Specification.where(null);
-        String firstName = filterDto.getFirstName();
-        String gender = filterDto.getGender();
-        Long specialityId = filterDto.getSpecialityId();
-        BigDecimal minPrice = filterDto.getMinPrice();
-        BigDecimal maxPrice = filterDto.getMaxPrice();
 
-        if (firstName != null)  {
-            spec = spec.and(PsychologistSpecification.
-                    hasFirstName(firstName));
+        String firstName = filterDto.getFirstName();
+        if (firstName != null) {
+            spec = spec.and(PsychologistSpecification
+                    .hasFirstName(firstName));
         }
+
+        String gender = filterDto.getGender();
         if (gender != null) {
-            spec = spec.and(PsychologistSpecification.
-                    hasGender(gender));
+            spec = spec.and(PsychologistSpecification
+                    .hasGender(gender));
         }
+
+        Long specialityId = filterDto.getSpecialityId();
         if (specialityId != null) {
-            spec = spec.and(PsychologistSpecification.
-                    hasSpecialityId(specialityId));
+            spec = spec.and(PsychologistSpecification
+                    .hasSpecialityId(specialityId));
         }
+
+        BigDecimal minPrice = filterDto.getMinPrice();
         if (minPrice != null) {
-            spec = spec.and(PsychologistSpecification.
-                    hasMinPrice(minPrice));
+            spec = spec.and(PsychologistSpecification
+                    .hasMinPrice(minPrice));
         }
+
+        BigDecimal maxPrice = filterDto.getMaxPrice();
         if (maxPrice != null) {
-            spec = spec.and(PsychologistSpecification.
-                    hasMaxPrice(maxPrice));
+            spec = spec.and(PsychologistSpecification
+                    .hasMaxPrice(maxPrice));
         }
 
         return psychologistRepository.findAll(spec, pageable)

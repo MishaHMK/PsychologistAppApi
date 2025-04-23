@@ -1,10 +1,9 @@
 package psychologist.project.repository.psychologist;
 
+import java.math.BigDecimal;
 import org.springframework.data.jpa.domain.Specification;
 import psychologist.project.model.Psychologist;
 import psychologist.project.model.Psychologist.Gender;
-
-import java.math.BigDecimal;
 
 public class PsychologistSpecification {
     public static Specification<Psychologist> hasFirstName(String firstName) {

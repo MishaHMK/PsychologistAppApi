@@ -2,7 +2,6 @@ package psychologist.project.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import psychologist.project.config.MapperConfig;
 import psychologist.project.dto.CreatePsychologistDto;

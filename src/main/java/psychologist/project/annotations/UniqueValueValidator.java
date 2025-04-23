@@ -21,7 +21,9 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Ob
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if (value == null) return true;
+        if (value == null) {
+            return true;
+        }
 
         String query = String.format("SELECT COUNT(e) FROM %s e WHERE e.%s = :value",
                 entityClass.getSimpleName(), fieldName);
