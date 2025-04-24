@@ -11,3 +11,4 @@ Java Spring Boot backend API of online system for searching psychologists and by
   ![image](https://github.com/user-attachments/assets/c8973069-6f6c-429b-ba80-44a534d198a9)
 )
 8. Run project `mvn clean install` and then `java -jar target/PsychologistApp-0.0.1-SNAPSHOT.jar`
+9. Proceed to [Interactive Swagger Documentation](http://localhost:8080/api/swagger-ui/index.html)
