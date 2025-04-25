@@ -13,7 +13,7 @@
 
     <groupId>psychologist.project</groupId>
     <artifactId>PsychologistApp</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <java.version>17</java.version>
