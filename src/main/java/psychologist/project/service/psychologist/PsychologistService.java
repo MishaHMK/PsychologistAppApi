@@ -2,9 +2,9 @@ package psychologist.project.service.psychologist;
 
 import java.util.List;
 import org.springframework.data.domain.Pageable;
-import psychologist.project.dto.CreatePsychologistDto;
-import psychologist.project.dto.PsychologistDto;
-import psychologist.project.dto.PsychologistFilterDto;
+import psychologist.project.dto.psychologist.CreatePsychologistDto;
+import psychologist.project.dto.psychologist.PsychologistDto;
+import psychologist.project.dto.psychologist.PsychologistFilterDto;
 
 public interface PsychologistService {
     PsychologistDto getPsychologist(Long id);

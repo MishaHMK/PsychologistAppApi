@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-spec-psych-data
+      author: MishaHMK
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "john.price@example.com"
+              - column:
+                  name: password
+                  value: "$2a$12$6acMlxU.6hhwIZb/8IqINO257Ceztl75EsaKEe4YE4Yo3fW.V10gi" #securePassword123
+              - column:
+                  name: first_name
+                  value: "John"
+              - column:
+                  name: last_name
+                  value: "Price"
+              - column:
+                  name: father_name
+                  value: "Victor"
+              - column:
+                  name: gender
+                  value: "MALE"
+              - column:
+                  name: role
+                  value: "ADMIN"
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "lisa.baker@example.com"
+              - column:
+                  name: password
+                  value: "$2a$12$6acMlxU.6hhwIZb/8IqINO257Ceztl75EsaKEe4YE4Yo3fW.V10gi" #securePassword123
+              - column:
+                  name: first_name
+                  value: "Lisa"
+              - column:
+                  name: last_name
+                  value: "Baker"
+              - column:
+                  name: father_name
+                  value: "Kate"
+              - column:
+                  name: gender
+                  value: "FEMALE"
+              - column:
+                  name: role
+                  value: "CUSTOMER"

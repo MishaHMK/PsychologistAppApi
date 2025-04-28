@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import psychologist.project.config.MapperConfig;
-import psychologist.project.dto.CreatePsychologistDto;
-import psychologist.project.dto.PsychologistDto;
+import psychologist.project.dto.psychologist.CreatePsychologistDto;
+import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.model.Psychologist;
 import psychologist.project.model.Speciality;
 

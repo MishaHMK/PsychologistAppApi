@@ -6,7 +6,6 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Object> {
-
     private String fieldName;
     private Class<?> entityClass;
 
