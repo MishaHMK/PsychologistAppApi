@@ -1,4 +1,4 @@
-package psychologist.project.dto;
+package psychologist.project.dto.psychologist;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import psychologist.project.annotations.EnumValue;
 import psychologist.project.annotations.UniqueValue;
 import psychologist.project.model.Psychologist;
 
@@ -29,6 +30,8 @@ public class CreatePsychologistDto {
     private String introduction;
     @NotNull(message = "Speciality id is required")
     private Long specialityId;
+    @EnumValue(enumClass = Psychologist.Gender.class,
+            message = "Gender must be one of: MALE, FEMALE, OTHER")
     @NotNull(message = "Specialist gender is required")
     private String gender;
 }

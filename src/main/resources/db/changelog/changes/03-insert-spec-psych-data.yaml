@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: insert-spec-psych-data
-      author: bookstore
+      author: MishaHMK
       changes:
         - insert:
             tableName: specialities

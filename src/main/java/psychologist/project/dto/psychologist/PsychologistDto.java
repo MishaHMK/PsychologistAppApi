@@ -1,4 +1,4 @@
-package psychologist.project.dto;
+package psychologist.project.dto.psychologist;
 
 import java.math.BigDecimal;
 import lombok.Data;

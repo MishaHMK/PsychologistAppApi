@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import psychologist.project.dto.CreatePsychologistDto;
-import psychologist.project.dto.PsychologistDto;
-import psychologist.project.dto.PsychologistFilterDto;
+import psychologist.project.dto.psychologist.CreatePsychologistDto;
+import psychologist.project.dto.psychologist.PsychologistDto;
+import psychologist.project.dto.psychologist.PsychologistFilterDto;
 import psychologist.project.service.psychologist.PsychologistService;
 
 @Tag(name = "Psychologist controller",
@@ -44,6 +45,7 @@ public class PsychologistController {
         return psychologistService.getAllPsychologists(pageable);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
     @Operation(summary = "Create new psychologist",
@@ -53,6 +55,7 @@ public class PsychologistController {
         return psychologistService.save(createDto);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete psychologist",
