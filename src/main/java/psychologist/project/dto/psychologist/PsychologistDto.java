@@ -1,6 +1,7 @@
 package psychologist.project.dto.psychologist;
 
 import java.math.BigDecimal;
+import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import psychologist.project.model.Speciality;
@@ -18,4 +19,6 @@ public class PsychologistDto {
     private Speciality speciality;
     private BigDecimal sessionPrice;
     private String gender;
+    private Set<Long> concernIds;
+    private Set<Long> approachIds;
 }

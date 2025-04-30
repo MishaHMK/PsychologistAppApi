@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
+import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 import psychologist.project.mapper.PsychologistMapper;
 import psychologist.project.model.Psychologist;
 import psychologist.project.model.Speciality;
@@ -27,8 +28,8 @@ public class PsychologistServiceImpl implements PsychologistService {
     private final SpecialityRepository specialityRepository;
 
     @Override
-    public PsychologistDto getPsychologist(Long id) {
-        return psychologistMapper.toDto(
+    public PsychologistWithDetailsDto getPsychologist(Long id) {
+        return psychologistMapper.toDetailedDto(
                 psychologistRepository.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("Psychologist with id "
@@ -44,10 +45,10 @@ public class PsychologistServiceImpl implements PsychologistService {
     }
 
     @Override
-    public List<PsychologistDto> getAllPsychologists(Pageable pageable) {
+    public List<PsychologistWithDetailsDto> getAllPsychologists(Pageable pageable) {
         return psychologistRepository.findAll(pageable)
                 .stream()
-                .map(psychologistMapper::toDto)
+                .map(psychologistMapper::toDetailedDto)
                 .toList();
     }
 
@@ -89,6 +90,18 @@ public class PsychologistServiceImpl implements PsychologistService {
         if (maxPrice != null) {
             spec = spec.and(PsychologistSpecification
                     .hasMaxPrice(maxPrice));
+        }
+
+        Long[] concernIds = filterDto.getConcernIds();
+        if (concernIds != null && concernIds.length > 0) {
+            spec = spec.and(PsychologistSpecification
+                    .hasConcernIds(concernIds));
+        }
+
+        Long[] approachIds = filterDto.getApproachIds();
+        if (approachIds != null && approachIds.length > 0) {
+            spec = spec.and(PsychologistSpecification
+                    .hasApproachIds(approachIds));
         }
 
         return psychologistRepository.findAll(spec, pageable)

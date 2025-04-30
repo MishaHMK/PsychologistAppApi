@@ -10,4 +10,6 @@ public class PsychologistFilterDto {
     private Long specialityId;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
+    private Long[] concernIds;
+    private Long[] approachIds;
 }

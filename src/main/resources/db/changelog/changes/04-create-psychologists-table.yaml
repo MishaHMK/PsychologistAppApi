@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psychologists-table
+      author: MishaHMK
+      changes:
+        - createTable:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: father_name
+                  type: varchar(255)
+              - column:
+                  name: introduction
+                  type: varchar(512)
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: gender
+                  type: enum('FEMALE', 'MALE', 'OTHER')
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speciality_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_price
+                  type: decimal(11,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: speciality_id
+                  baseTableName: psychologists
+                  constraintName: fk_psychologists_specialities
+                  referencedColumnNames: id
+                  referencedTableName: specialities
+
+        - createTable:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: concern_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: psychologist_id
+                  baseTableName: psychologists_concerns
+                  constraintName: fk_psychologists_concerns
+                  referencedColumnNames: id
+                  referencedTableName: psychologists
+              - addForeignKeyConstraint:
+                  baseColumnNames: concern_id
+                  baseTableName: psychologists_concerns
+                  constraintName: fk_concerns_psychologists
+                  referencedColumnNames: id
+                  referencedTableName: concerns
+
+
+        - createTable:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: approach_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: psychologist_id
+                  baseTableName: psychologists_approaches
+                  constraintName: fk_psychologists_approaches
+                  referencedColumnNames: id
+                  referencedTableName: psychologists
+              - addForeignKeyConstraint:
+                  baseColumnNames: approach_id
+                  baseTableName: psychologists_approaches
+                  constraintName: fk_approaches_psychologists
+                  referencedColumnNames: id
+                  referencedTableName: approach
