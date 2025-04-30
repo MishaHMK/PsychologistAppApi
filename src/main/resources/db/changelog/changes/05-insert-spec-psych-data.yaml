@@ -1,0 +1,775 @@
+#file: noinspection YAMLSchemaValidation
+databaseChangeLog:
+  - changeSet:
+      id: insert-spec-psych-data
+      author: MishaHMK
+      changes:
+        - insert:
+            tableName: specialities
+            columns:
+              - column:
+                  name: name
+                  value: "Individual"
+        - insert:
+            tableName: specialities
+            columns:
+              - column:
+                  name: name
+                  value: "Couple therapy"
+
+
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Anxiety"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Grief and loss"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Panic attacks"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Family issues"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Burnout"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Depression"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Loneliness"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Mood swings"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Social anxiety"
+        - insert:
+            tableName: concerns
+            columns:
+              - column:
+                  name: name
+                  value: "Stress"
+
+
+        - insert:
+            tableName: approaches
+            columns:
+              - column:
+                  name: name
+                  value: "Psychodynamic Therapy"
+        - insert:
+            tableName: approaches
+            columns:
+              - column:
+                  name: name
+                  value: "Cognitive Behavioral Therapy"
+        - insert:
+            tableName: approaches
+            columns:
+              - column:
+                  name: name
+                  value: "Humanistic Therapy"
+        - insert:
+            tableName: approaches
+            columns:
+              - column:
+                  name: name
+                  value: "Integrative Therapy"
+        - insert:
+            tableName: approaches
+            columns:
+              - column:
+                  name: name
+                  value: "Narrative Therapy"
+
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Bob"
+              - column:
+                  name: last_name
+                  value: "Doe"
+              - column:
+                  name: father_name
+                  value: "John"
+              - column:
+                  name: introduction
+                  value: "Some intro data"
+              - column:
+                  name: email
+                  value: "bob.doe@gmail.com"
+              - column:
+                  name: phone_number
+                  value: "0661212122"
+              - column:
+                  name: session_price
+                  value: '9.99'
+              - column:
+                  name: gender
+                  value: 'MALE'
+              - column:
+                  name: speciality_id
+                  value: '1'
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Jane"
+              - column:
+                  name: last_name
+                  value: "Foster"
+              - column:
+                  name: father_name
+                  value: "Maggie"
+              - column:
+                  name: introduction
+                  value: "Some other intro data"
+              - column:
+                  name: email
+                  value: "jane.foster@gmail.com"
+              - column:
+                  name: phone_number
+                  value: "0661212123"
+              - column:
+                  name: session_price
+                  value: '8.99'
+              - column:
+                  name: gender
+                  value: 'FEMALE'
+              - column:
+                  name: speciality_id
+                  value: '2'
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Mary"
+              - column:
+                  name: last_name
+                  value: "Graham"
+              - column:
+                  name: father_name
+                  value: "Lise"
+              - column:
+                  name: introduction
+                  value: "Some more intro data"
+              - column:
+                  name: email
+                  value: "mary.graham@gmail.com"
+              - column:
+                  name: phone_number
+                  value: "0661212124"
+              - column:
+                  name: session_price
+                  value: '9.99'
+              - column:
+                  name: gender
+                  value: 'FEMALE'
+              - column:
+                  name: speciality_id
+                  value: '1'
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "John"
+              - column:
+                  name: last_name
+                  value: "Bowser"
+              - column:
+                  name: father_name
+                  value: "Richard"
+              - column:
+                  name: introduction
+                  value: "Experienced in behavioral therapy."
+              - column:
+                  name: email
+                  value: "john.bowser@example.com"
+              - column:
+                  name: phone_number
+                  value: "0673344556"
+              - column:
+                  name: session_price
+                  value: "12.50"
+              - column:
+                  name: gender
+                  value: "MALE"
+              - column:
+                  name: speciality_id
+                  value: "1"
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Emily"
+              - column:
+                  name: last_name
+                  value: "Smith"
+              - column:
+                  name: father_name
+                  value: "James"
+              - column:
+                  name: introduction
+                  value: "Specialist in child psychology."
+              - column:
+                  name: email
+                  value: "emily.smith@clinic.com"
+              - column:
+                  name: phone_number
+                  value: "0689988776"
+              - column:
+                  name: session_price
+                  value: "15.00"
+              - column:
+                  name: gender
+                  value: "FEMALE"
+              - column:
+                  name: speciality_id
+                  value: "2"
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Carlos"
+              - column:
+                  name: last_name
+                  value: "Mendez"
+              - column:
+                  name: father_name
+                  value: "Raul"
+              - column:
+                  name: introduction
+                  value: "Focus on PTSD and trauma recovery."
+              - column:
+                  name: email
+                  value: "carlos.mendez@therapy.net"
+              - column:
+                  name: phone_number
+                  value: "0691122334"
+              - column:
+                  name: session_price
+                  value: "11.75"
+              - column:
+                  name: gender
+                  value: "MALE"
+              - column:
+                  name: speciality_id
+                  value: "2"
+        - insert:
+            tableName: psychologists
+            columns:
+              - column:
+                  name: first_name
+                  value: "Sophie"
+              - column:
+                  name: last_name
+                  value: "Nguyen"
+              - column:
+                  name: father_name
+                  value: "Thi"
+              - column:
+                  name: introduction
+                  value: "Mindfulness and stress management expert."
+              - column:
+                  name: email
+                  value: "sophie.nguyen@wellness.org"
+              - column:
+                  name: phone_number
+                  value: "0654321876"
+              - column:
+                  name: session_price
+                  value: "10.25"
+              - column:
+                  name: gender
+                  value: "OTHER"
+              - column:
+                  name: speciality_id
+                  value: "1"
+
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 1
+              - column:
+                  name: concern_id
+                  value: 1
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 1
+              - column:
+                  name: concern_id
+                  value: 4
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 1
+              - column:
+                  name: concern_id
+                  value: 7
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: concern_id
+                  value: 2
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: concern_id
+                  value: 5
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: concern_id
+                  value: 8
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: concern_id
+                  value: 1
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: concern_id
+                  value: 3
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: concern_id
+                  value: 9
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: concern_id
+                  value: 2
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: concern_id
+                  value: 4
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: concern_id
+                  value: 10
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: concern_id
+                  value: 3
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: concern_id
+                  value: 6
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: concern_id
+                  value: 8
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: concern_id
+                  value: 1
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: concern_id
+                  value: 5
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: concern_id
+                  value: 10
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 7
+              - column:
+                  name: concern_id
+                  value: 4
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 7
+              - column:
+                  name: concern_id
+                  value: 6
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 7
+              - column:
+                  name: concern_id
+                  value: 7
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: concern_id
+                  value: 10
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: concern_id
+                  value: 6
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: concern_id
+                  value: 5
+        - insert:
+            tableName: psychologists_concerns
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: concern_id
+                  value: 9
+
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 1
+              - column:
+                  name: approach_id
+                  value: 2
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 1
+              - column:
+                  name: approach_id
+                  value: 5
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 1
+              - column:
+                  name: approach_id
+                  value: 7
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: approach_id
+                  value: 3
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: approach_id
+                  value: 6
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: approach_id
+                  value: 9
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: approach_id
+                  value: 1
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: approach_id
+                  value: 8
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: approach_id
+                  value: 11
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: approach_id
+                  value: 4
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: approach_id
+                  value: 10
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: approach_id
+                  value: 12
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: approach_id
+                  value: 2
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: approach_id
+                  value: 3
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: approach_id
+                  value: 6
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: approach_id
+                  value: 1
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: approach_id
+                  value: 7
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 6
+              - column:
+                  name: approach_id
+                  value: 10
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 7
+              - column:
+                  name: approach_id
+                  value: 4
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 7
+              - column:
+                  name: approach_id
+                  value: 5
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 7
+              - column:
+                  name: approach_id
+                  value: 9
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 3
+              - column:
+                  name: approach_id
+                  value: 12
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 2
+              - column:
+                  name: approach_id
+                  value: 8
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 4
+              - column:
+                  name: approach_id
+                  value: 6
+        - insert:
+            tableName: psychologists_approaches
+            columns:
+              - column:
+                  name: psychologist_id
+                  value: 5
+              - column:
+                  name: approach_id
+                  value: 11

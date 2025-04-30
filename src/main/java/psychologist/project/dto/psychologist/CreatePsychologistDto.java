@@ -2,8 +2,10 @@ package psychologist.project.dto.psychologist;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import psychologist.project.annotations.EnumValue;
@@ -34,4 +36,8 @@ public class CreatePsychologistDto {
             message = "Gender must be one of: MALE, FEMALE, OTHER")
     @NotNull(message = "Specialist gender is required")
     private String gender;
+    @NotEmpty
+    private Set<Long> concernIds;
+    @NotEmpty
+    private Set<Long> approachIds;
 }

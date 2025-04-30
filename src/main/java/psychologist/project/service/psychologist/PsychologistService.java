@@ -5,13 +5,14 @@ import org.springframework.data.domain.Pageable;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
+import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 
 public interface PsychologistService {
-    PsychologistDto getPsychologist(Long id);
+    PsychologistWithDetailsDto getPsychologist(Long id);
 
     PsychologistDto save(CreatePsychologistDto createDto);
 
-    List<PsychologistDto> getAllPsychologists(Pageable pageable);
+    List<PsychologistWithDetailsDto> getAllPsychologists(Pageable pageable);
 
     List<PsychologistDto> search(PsychologistFilterDto filterDto,
                                  Pageable pageable);

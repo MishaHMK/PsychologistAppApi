@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
+import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 import psychologist.project.service.psychologist.PsychologistService;
 
 @Tag(name = "Psychologist controller",
@@ -33,14 +34,14 @@ public class PsychologistController {
     @GetMapping("/{id}")
     @Operation(summary = "Get psychologist by id",
             description = "Get psychologist from system by given id")
-    public PsychologistDto getPsychologistsById(@PathVariable Long id) {
+    public PsychologistWithDetailsDto getPsychologistsById(@PathVariable Long id) {
         return psychologistService.getPsychologist(id);
     }
 
     @GetMapping()
     @Operation(summary = "Get all psychologists",
             description = "Get all psychologists from system")
-    public List<PsychologistDto> getAllPsychologists(
+    public List<PsychologistWithDetailsDto> getAllPsychologists(
             @ParameterObject Pageable pageable) {
         return psychologistService.getAllPsychologists(pageable);
     }
