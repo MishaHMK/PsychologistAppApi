@@ -16,7 +16,7 @@ import psychologist.project.service.filterdata.FilterDataService;
         description = "Data for psychologist filtering management endpoint")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/psychologists")
+@RequestMapping("/filterdata")
 public class FilterDataController {
     private final FilterDataService filterDataService;
 

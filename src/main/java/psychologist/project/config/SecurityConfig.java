@@ -43,7 +43,8 @@ public class SecurityConfig {
                                 antMatcher("/auth/**"),
                                 antMatcher("/swagger-ui/**"),
                                 antMatcher("/v3/api-docs/**"),
-                                antMatcher(HttpMethod.GET, "/psychologists/**"))
+                                antMatcher(HttpMethod.GET, "/psychologists/**"),
+                                antMatcher(HttpMethod.GET, "/filterdata/**"))
                         .permitAll()
                         .anyRequest()
                         .authenticated()
