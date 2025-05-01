@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 import psychologist.project.annotations.EnumValue;
 import psychologist.project.annotations.FieldMatch;
-import psychologist.project.model.Psychologist;
+import psychologist.project.model.Gender;
 
 @Data
 @FieldMatch(first = "password", second = "confirmPassword",
@@ -38,7 +38,7 @@ public class UserRegisterRequestDto {
             message = "Password size must be between "
                     + "8 and 20 symbols inclusively")
     private String confirmPassword;
-    @EnumValue(enumClass = Psychologist.Gender.class,
+    @EnumValue(enumClass = Gender.class,
             message = "Gender must be one of: MALE, FEMALE, OTHER")
     @NotBlank(message = "Gender is required")
     private String gender;

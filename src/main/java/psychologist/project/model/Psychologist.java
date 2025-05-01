@@ -81,10 +81,4 @@ public class Psychologist {
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean isDeleted = false;
-
-    public enum Gender {
-        FEMALE,
-        MALE,
-        OTHER
-    }
 }

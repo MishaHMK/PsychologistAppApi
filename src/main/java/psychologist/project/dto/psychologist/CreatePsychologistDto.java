@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import psychologist.project.annotations.EnumValue;
 import psychologist.project.annotations.UniqueValue;
+import psychologist.project.model.Gender;
 import psychologist.project.model.Psychologist;
 
 @Data
@@ -32,7 +33,7 @@ public class CreatePsychologistDto {
     private String introduction;
     @NotNull(message = "Speciality id is required")
     private Long specialityId;
-    @EnumValue(enumClass = Psychologist.Gender.class,
+    @EnumValue(enumClass = Gender.class,
             message = "Gender must be one of: MALE, FEMALE, OTHER")
     @NotNull(message = "Specialist gender is required")
     private String gender;

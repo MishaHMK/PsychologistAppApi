@@ -49,6 +49,10 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")

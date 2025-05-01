@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import org.springframework.data.jpa.domain.Specification;
 import psychologist.project.model.Concern;
+import psychologist.project.model.Gender;
 import psychologist.project.model.Psychologist;
-import psychologist.project.model.Psychologist.Gender;
 
 public class PsychologistSpecification {
     public static Specification<Psychologist> hasFirstName(String firstName) {
