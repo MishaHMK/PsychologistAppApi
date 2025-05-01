@@ -69,7 +69,7 @@ public class PsychologistController {
     @GetMapping("/filter")
     @Operation(summary = "Search for psychologist",
             description = "Filter psychologist data by given params")
-    public List<PsychologistDto> filterPsychologists(
+    public List<PsychologistWithDetailsDto> filterPsychologists(
             @ParameterObject PsychologistFilterDto filter,
             @ParameterObject Pageable pageable) {
         return psychologistService.search(filter, pageable);

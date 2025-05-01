@@ -14,7 +14,7 @@ public interface PsychologistService {
 
     List<PsychologistWithDetailsDto> getAllPsychologists(Pageable pageable);
 
-    List<PsychologistDto> search(PsychologistFilterDto filterDto,
+    List<PsychologistWithDetailsDto> search(PsychologistFilterDto filterDto,
                                  Pageable pageable);
 
     void delete(Long id);

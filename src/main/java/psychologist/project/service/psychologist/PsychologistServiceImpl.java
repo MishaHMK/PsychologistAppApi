@@ -58,7 +58,7 @@ public class PsychologistServiceImpl implements PsychologistService {
     }
 
     @Override
-    public List<PsychologistDto> search(PsychologistFilterDto filterDto,
+    public List<PsychologistWithDetailsDto> search(PsychologistFilterDto filterDto,
                                         Pageable pageable) {
         Specification<Psychologist> spec = Specification.where(null);
 
@@ -106,7 +106,7 @@ public class PsychologistServiceImpl implements PsychologistService {
 
         return psychologistRepository.findAll(spec, pageable)
                 .stream()
-                .map(psychologistMapper::toDto)
+                .map(psychologistMapper::toDetailedDto)
                 .toList();
     }
 
