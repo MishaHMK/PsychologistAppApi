@@ -134,7 +134,7 @@ databaseChangeLog:
                   value: "0661212122"
               - column:
                   name: image_url
-                  value: "https://imgur.com/oOFnYdS"
+                  value: "https://imgur.com/oOFnYdS.png"
               - column:
                   name: experience
                   value: '8'
@@ -170,7 +170,7 @@ databaseChangeLog:
                   value: "0661212123"
               - column:
                   name: image_url
-                  value: "https://imgur.com/gBPz8KZ"
+                  value: "https://imgur.com/gBPz8KZ.png"
               - column:
                   name: experience
                   value: '7'
@@ -206,7 +206,7 @@ databaseChangeLog:
                   value: "0661212124"
               - column:
                   name: image_url
-                  value: "https://imgur.com/gBPz8KZ"
+                  value: "https://imgur.com/gBPz8KZ.png"
               - column:
                   name: experience
                   value: '2'
@@ -245,7 +245,7 @@ databaseChangeLog:
                   value: "12.50"
               - column:
                   name: image_url
-                  value: "https://imgur.com/oOFnYdS"
+                  value: "https://imgur.com/oOFnYdS.png"
               - column:
                   name: experience
                   value: '3'
@@ -278,7 +278,7 @@ databaseChangeLog:
                   value: "0689988776"
               - column:
                   name: image_url
-                  value: "https://imgur.com/gBPz8KZ"
+                  value: "https://imgur.com/gBPz8KZ.png"
               - column:
                   name: experience
                   value: '2'
@@ -317,7 +317,7 @@ databaseChangeLog:
                   value: "11.75"
               - column:
                   name: image_url
-                  value: "https://imgur.com/5jWJsCD"
+                  value: "https://imgur.com/5jWJsCD.png"
               - column:
                   name: experience
                   value: '5'
@@ -350,7 +350,7 @@ databaseChangeLog:
                   value: "0654321876"
               - column:
                   name: image_url
-                  value: "https://imgur.com/5jWJsCD"
+                  value: "https://imgur.com/5jWJsCD.png"
               - column:
                   name: experience
                   value: '4'

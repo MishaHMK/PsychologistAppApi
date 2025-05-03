@@ -44,13 +44,13 @@ public class PsychologistServiceImpl implements PsychologistService {
                 || toCreate.getImageUrl().isEmpty()) {
             switch (toCreate.getGender()) {
                 case MALE:
-                    toCreate.setImageUrl("https://imgur.com/oOFnYdS");
+                    toCreate.setImageUrl("https://imgur.com/oOFnYdS.png");
                     break;
                 case FEMALE:
-                    toCreate.setImageUrl("https://imgur.com/gBPz8KZ");
+                    toCreate.setImageUrl("https://imgur.com/gBPz8KZ.png");
                     break;
                 default:
-                    toCreate.setImageUrl("https://imgur.com/5jWJsCD");
+                    toCreate.setImageUrl("https://imgur.com/5jWJsCD.png");
                     break;
             }
         }
