@@ -40,7 +40,8 @@ public class PsychologistServiceImpl implements PsychologistService {
     @Override
     public PsychologistDto save(CreatePsychologistDto createDto) {
         Psychologist toCreate = psychologistMapper.toEntity(createDto);
-        if (toCreate.getImageUrl() == null) {
+        if (toCreate.getImageUrl() == null
+                || toCreate.getImageUrl().isEmpty()) {
             switch (toCreate.getGender()) {
                 case MALE:
                     toCreate.setImageUrl("https://imgur.com/oOFnYdS");
