@@ -47,9 +47,14 @@ public class Psychologist {
 
     private String phoneNumber;
 
+    @Column(nullable = false)
     private String email;
 
     private String introduction;
+
+    private Integer experience;
+
+    private String imageUrl;
 
     @Column(nullable = false)
     private BigDecimal sessionPrice;

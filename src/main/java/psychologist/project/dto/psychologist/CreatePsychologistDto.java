@@ -37,6 +37,9 @@ public class CreatePsychologistDto {
             message = "Gender must be one of: MALE, FEMALE, OTHER")
     @NotNull(message = "Specialist gender is required")
     private String gender;
+    @NotNull(message = "Experience (years) is required")
+    private Integer experience;
+    private String imageUrl;
     @NotEmpty
     private Set<Long> concernIds;
     @NotEmpty

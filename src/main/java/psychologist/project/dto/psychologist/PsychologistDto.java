@@ -19,6 +19,8 @@ public class PsychologistDto {
     private Speciality speciality;
     private BigDecimal sessionPrice;
     private String gender;
+    private Integer experience;
+    private String imageUrl;
     private Set<Long> concernIds;
     private Set<Long> approachIds;
 }

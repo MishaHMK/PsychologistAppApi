@@ -30,6 +30,12 @@ databaseChangeLog:
                   name: introduction
                   type: varchar(512)
               - column:
+                  name: experience
+                  type: integer
+              - column:
+                  name: image_url
+                  type: varchar(512)
+              - column:
                   name: email
                   type: varchar(255)
                   constraints:
@@ -39,6 +45,7 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     unique: true
+                    nullable: false
               - column:
                   name: gender
                   type: enum('FEMALE', 'MALE', 'OTHER')

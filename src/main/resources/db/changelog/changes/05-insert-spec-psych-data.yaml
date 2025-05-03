@@ -133,6 +133,12 @@ databaseChangeLog:
                   name: phone_number
                   value: "0661212122"
               - column:
+                  name: image_url
+                  value: "https://imgur.com/oOFnYdS"
+              - column:
+                  name: experience
+                  value: '8'
+              - column:
                   name: session_price
                   value: '9.99'
               - column:
@@ -163,6 +169,12 @@ databaseChangeLog:
                   name: phone_number
                   value: "0661212123"
               - column:
+                  name: image_url
+                  value: "https://imgur.com/gBPz8KZ"
+              - column:
+                  name: experience
+                  value: '7'
+              - column:
                   name: session_price
                   value: '8.99'
               - column:
@@ -192,6 +204,12 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   value: "0661212124"
+              - column:
+                  name: image_url
+                  value: "https://imgur.com/gBPz8KZ"
+              - column:
+                  name: experience
+                  value: '2'
               - column:
                   name: session_price
                   value: '9.99'
@@ -226,6 +244,12 @@ databaseChangeLog:
                   name: session_price
                   value: "12.50"
               - column:
+                  name: image_url
+                  value: "https://imgur.com/oOFnYdS"
+              - column:
+                  name: experience
+                  value: '3'
+              - column:
                   name: gender
                   value: "MALE"
               - column:
@@ -252,6 +276,12 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   value: "0689988776"
+              - column:
+                  name: image_url
+                  value: "https://imgur.com/gBPz8KZ"
+              - column:
+                  name: experience
+                  value: '2'
               - column:
                   name: session_price
                   value: "15.00"
@@ -286,8 +316,14 @@ databaseChangeLog:
                   name: session_price
                   value: "11.75"
               - column:
+                  name: image_url
+                  value: "https://imgur.com/5jWJsCD"
+              - column:
+                  name: experience
+                  value: '5'
+              - column:
                   name: gender
-                  value: "MALE"
+                  value: "OTHER"
               - column:
                   name: speciality_id
                   value: "2"
@@ -312,6 +348,12 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   value: "0654321876"
+              - column:
+                  name: image_url
+                  value: "https://imgur.com/5jWJsCD"
+              - column:
+                  name: experience
+                  value: '4'
               - column:
                   name: session_price
                   value: "10.25"

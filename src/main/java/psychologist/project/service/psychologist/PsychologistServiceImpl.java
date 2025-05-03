@@ -40,6 +40,19 @@ public class PsychologistServiceImpl implements PsychologistService {
     @Override
     public PsychologistDto save(CreatePsychologistDto createDto) {
         Psychologist toCreate = psychologistMapper.toEntity(createDto);
+        if (toCreate.getImageUrl() == null) {
+            switch (toCreate.getGender()) {
+                case MALE:
+                    toCreate.setImageUrl("https://imgur.com/oOFnYdS");
+                    break;
+                case FEMALE:
+                    toCreate.setImageUrl("https://imgur.com/gBPz8KZ");
+                    break;
+                default:
+                    toCreate.setImageUrl("https://imgur.com/5jWJsCD");
+                    break;
+            }
+        }
         PsychologistDto dto = psychologistMapper.toDto(psychologistRepository.save(toCreate));
         return dto.setSpeciality(findSpecialityById(createDto.getSpecialityId()));
     }
