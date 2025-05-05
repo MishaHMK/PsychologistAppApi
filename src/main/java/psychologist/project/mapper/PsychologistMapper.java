@@ -56,4 +56,14 @@ public interface PsychologistMapper {
         speciality.setId(id);
         return speciality;
     }
+
+    @Named("psychologistFromId")
+    default Psychologist psychologistFromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        Psychologist psychologist = new Psychologist();
+        psychologist.setId(id);
+        return psychologist;
+    }
 }

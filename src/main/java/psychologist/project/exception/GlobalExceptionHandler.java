@@ -1,5 +1,6 @@
 package psychologist.project.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -22,21 +23,45 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleAccessErrors(
+            EntityNotFoundException ex) {
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(AccessException.class)
     public ResponseEntity<Map<String, Object>> handleAccessErrors(
             AccessException ex) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("error", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(RegistrationException.class)
     public ResponseEntity<Map<String, Object>> handleAccessErrors(
             RegistrationException ex) {
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(BookingException.class)
+    public ResponseEntity<Map<String, Object>> handleAccessErrors(
+            BookingException ex) {
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(PaymentException.class)
+    public ResponseEntity<Map<String, Object>> handlePaymentException(
+            PaymentException ex) {
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.CONFLICT);
+    }
+
+    private Map<String, Object> buildExceptionResponse(Throwable ex) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("error", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+        return body;
     }
 }

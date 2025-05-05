@@ -40,6 +40,8 @@ public class CreatePsychologistDto {
     @NotNull(message = "Experience (years) is required")
     private Integer experience;
     private String imageUrl;
+    @NotNull(message = "Meeting url is required")
+    private String meetingUrl;
     @NotEmpty
     private Set<Long> concernIds;
     @NotEmpty

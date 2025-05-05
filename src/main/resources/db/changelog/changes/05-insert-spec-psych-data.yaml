@@ -134,7 +134,10 @@ databaseChangeLog:
                   value: "0661212122"
               - column:
                   name: image_url
-                  value: "https://imgur.com/oOFnYdS.png"
+                  value: "https://imgur.com/x4CwadD.png"
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl011"
               - column:
                   name: experience
                   value: '8'
@@ -170,7 +173,10 @@ databaseChangeLog:
                   value: "0661212123"
               - column:
                   name: image_url
-                  value: "https://imgur.com/gBPz8KZ.png"
+                  value: "https://imgur.com/HPWr5rO.png"
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl012"
               - column:
                   name: experience
                   value: '7'
@@ -206,7 +212,10 @@ databaseChangeLog:
                   value: "0661212124"
               - column:
                   name: image_url
-                  value: "https://imgur.com/gBPz8KZ.png"
+                  value: "https://imgur.com/PZ3n7g0.png"
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl013"
               - column:
                   name: experience
                   value: '2'
@@ -244,8 +253,11 @@ databaseChangeLog:
                   name: session_price
                   value: "12.50"
               - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl014"
+              - column:
                   name: image_url
-                  value: "https://imgur.com/oOFnYdS.png"
+                  value: "https://imgur.com/kjinllt.png"
               - column:
                   name: experience
                   value: '3'
@@ -278,7 +290,10 @@ databaseChangeLog:
                   value: "0689988776"
               - column:
                   name: image_url
-                  value: "https://imgur.com/gBPz8KZ.png"
+                  value: "https://imgur.com/OH6o9tP.png"
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl015"
               - column:
                   name: experience
                   value: '2'
@@ -296,10 +311,10 @@ databaseChangeLog:
             columns:
               - column:
                   name: first_name
-                  value: "Carlos"
+                  value: "Clara"
               - column:
                   name: last_name
-                  value: "Mendez"
+                  value: "Connors"
               - column:
                   name: father_name
                   value: "Raul"
@@ -308,7 +323,7 @@ databaseChangeLog:
                   value: "Focus on PTSD and trauma recovery."
               - column:
                   name: email
-                  value: "carlos.mendez@therapy.net"
+                  value: "clara.connors@therapy.net"
               - column:
                   name: phone_number
                   value: "0691122334"
@@ -316,8 +331,11 @@ databaseChangeLog:
                   name: session_price
                   value: "11.75"
               - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl016"
+              - column:
                   name: image_url
-                  value: "https://imgur.com/5jWJsCD.png"
+                  value: "https://imgur.com/QUZahYt.png"
               - column:
                   name: experience
                   value: '5'
@@ -348,6 +366,9 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   value: "0654321876"
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl017"
               - column:
                   name: image_url
                   value: "https://imgur.com/5jWJsCD.png"

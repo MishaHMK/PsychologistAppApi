@@ -21,6 +21,7 @@ public class PsychologistWithDetailsDto {
     private String gender;
     private Integer experience;
     private String imageUrl;
+    private String meetingUrl;
     private Set<Concern> concerns;
     private Set<Approach> approaches;
 }

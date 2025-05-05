@@ -21,6 +21,7 @@ public class PsychologistDto {
     private String gender;
     private Integer experience;
     private String imageUrl;
+    private String meetingUrl;
     private Set<Long> concernIds;
     private Set<Long> approachIds;
 }

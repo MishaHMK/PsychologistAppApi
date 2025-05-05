@@ -36,6 +36,12 @@ databaseChangeLog:
                   name: image_url
                   type: varchar(512)
               - column:
+                  name: meeting_url
+                  type: varchar(512)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
                   name: email
                   type: varchar(255)
                   constraints:

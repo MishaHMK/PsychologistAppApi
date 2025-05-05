@@ -16,17 +16,17 @@ public interface PsychologistRepository
                 JpaSpecificationExecutor<Psychologist> {
     @Override
     @NonNull
-    @EntityGraph(attributePaths = "speciality")
+    @EntityGraph(attributePaths = {"speciality", "approaches", "concerns"})
     Optional<Psychologist> findById(@NonNull Long id);
 
     @Override
     @NonNull
-    @EntityGraph(attributePaths = "speciality")
+    @EntityGraph(attributePaths = {"speciality", "approaches", "concerns"})
     Page<Psychologist> findAll(@Nullable Specification<Psychologist> spec,
                                Pageable pageable);
 
     @Override
     @NonNull
-    @EntityGraph(attributePaths = "speciality")
+    @EntityGraph(attributePaths = {"speciality", "approaches", "concerns"})
     Page<Psychologist> findAll(Pageable pageable);
 }

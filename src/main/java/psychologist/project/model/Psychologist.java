@@ -54,6 +54,9 @@ public class Psychologist {
 
     private Integer experience;
 
+    @Column(nullable = false)
+    private String meetingUrl;
+
     private String imageUrl;
 
     @Column(nullable = false)

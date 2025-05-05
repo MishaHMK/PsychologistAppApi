@@ -1,0 +1,152 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-bookings-data
+      author: MishaHMK
+      changes:
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T09:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T09:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/abc123"
+              - column:
+                  name: status
+                  value: "PENDING"
+
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T11:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T11:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '2'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/def456"
+              - column:
+                  name: status
+                  value: "CONFIRMED"
+
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T16:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T16:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-15T10:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-15T10:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '1'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/jkl012"
+              - column:
+                  name: status
+                  value: "EXPIRED"
+
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-16T15:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-16T15:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '2'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '1'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/mno345"
+              - column:
+                  name: status
+                  value: "CANCELED"
+
+        - insert:
+            tableName: payments
+            columns:
+              - column:
+                  name: status
+                  value: PAID
+              - column:
+                  name: booking_id
+                  valueNumeric: '1'
+              - column:
+                  name: session_url
+                  value: "https://example.com/session/paid"
+              - column:
+                  name: session_id
+                  value: "sess_paid_001"
+              - column:
+                  name: amount
+                  valueNumeric: '99.99'
+
+        - insert:
+            tableName: payments
+            columns:
+              - column:
+                  name: status
+                  value: CANCELED
+              - column:
+                  name: booking_id
+                  valueNumeric: '2'
+              - column:
+                  name: session_url
+                  value: "https://example.com/session/canceled"
+              - column:
+                  name: session_id
+                  value: "sess_cancel_001"
+              - column:
+                  name: amount
+                  valueNumeric: '49.99'
