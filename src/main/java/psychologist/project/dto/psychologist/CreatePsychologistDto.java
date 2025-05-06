@@ -39,6 +39,10 @@ public class CreatePsychologistDto {
     private String gender;
     @NotNull(message = "Experience (years) is required")
     private Integer experience;
+    @NotNull(message = "Languages info is required")
+    private String languages;
+    @NotNull(message = "Education info is required")
+    private String education;
     private String imageUrl;
     @NotNull(message = "Meeting url is required")
     private String meetingUrl;

@@ -40,15 +40,15 @@ public class BookingController {
         return bookingService.getAll(pageable);
     }
 
-    @GetMapping("/free_spots/{id}")
+    @GetMapping("/free_spots/{psychologistId}")
     @Operation(summary = "Get all free spots",
             description = "Receive all available dates for "
                     + "psychologist by id on given date")
     public List<LocalDateTime> getAllFreeSpots(
-            @PathVariable Long id,
+            @PathVariable Long psychologistId,
             @ParameterObject LocalDate selectedDate) {
         return bookingService.findAvailableDateTimes(
-                selectedDate, id);
+                selectedDate, psychologistId);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")

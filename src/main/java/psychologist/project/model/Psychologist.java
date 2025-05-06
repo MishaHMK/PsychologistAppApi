@@ -1,5 +1,6 @@
 package psychologist.project.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,6 +59,10 @@ public class Psychologist {
     private String meetingUrl;
 
     private String imageUrl;
+
+    private String languages;
+
+    private String education;
 
     @Column(nullable = false)
     private BigDecimal sessionPrice;

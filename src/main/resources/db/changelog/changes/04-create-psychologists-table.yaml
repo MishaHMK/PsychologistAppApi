@@ -33,6 +33,12 @@ databaseChangeLog:
                   name: experience
                   type: integer
               - column:
+                  name: education
+                  type: varchar(255)
+              - column:
+                  name: languages
+                  type: varchar(512)
+              - column:
                   name: image_url
                   type: varchar(512)
               - column:

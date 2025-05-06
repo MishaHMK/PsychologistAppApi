@@ -134,10 +134,16 @@ databaseChangeLog:
                   value: "0661212122"
               - column:
                   name: image_url
-                  value: "https://imgur.com/x4CwadD.png"
+                  value: "https://imgur.com/wl9JRpA.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl011"
+              - column:
+                  name: languages
+                  value: "English, French, Spanish"
+              - column:
+                  name: education
+                  value: "MA in Psychology, University of California, Los Angeles"
               - column:
                   name: experience
                   value: '8'
@@ -173,10 +179,16 @@ databaseChangeLog:
                   value: "0661212123"
               - column:
                   name: image_url
-                  value: "https://imgur.com/HPWr5rO.png"
+                  value: "https://imgur.com/I6EnNsF.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl012"
+              - column:
+                  name: languages
+                  value: "English, Polish, Ukrainian"
+              - column:
+                  name: education
+                  value: "MA in Counseling Psychology, University of Toronto"
               - column:
                   name: experience
                   value: '7'
@@ -212,10 +224,16 @@ databaseChangeLog:
                   value: "0661212124"
               - column:
                   name: image_url
-                  value: "https://imgur.com/PZ3n7g0.png"
+                  value: "https://imgur.com/uInhXrt.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl013"
+              - column:
+                  name: languages
+                  value: "English, Arabic, French"
+              - column:
+                  name: education
+                  value: "PhD in Psychology, King’s College London"
               - column:
                   name: experience
                   value: '2'
@@ -257,7 +275,13 @@ databaseChangeLog:
                   value: "https://meet.example.com/jkl014"
               - column:
                   name: image_url
-                  value: "https://imgur.com/kjinllt.png"
+                  value: "https://imgur.com/8zLOEdR.png"
+              - column:
+                  name: languages
+                  value: "English, Hindi, Tamil"
+              - column:
+                  name: education
+                  value: "MSc in Clinical Psychology, University of Delhi"
               - column:
                   name: experience
                   value: '3'
@@ -290,10 +314,16 @@ databaseChangeLog:
                   value: "0689988776"
               - column:
                   name: image_url
-                  value: "https://imgur.com/OH6o9tP.png"
+                  value: "https://imgur.com/3hlwZ8g.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl015"
+              - column:
+                  name: languages
+                  value: "English, Japanese, Korean"
+              - column:
+                  name: education
+                  value: "MA in Mental Health Counseling, Kyoto University"
               - column:
                   name: experience
                   value: '2'
@@ -335,7 +365,13 @@ databaseChangeLog:
                   value: "https://meet.example.com/jkl016"
               - column:
                   name: image_url
-                  value: "https://imgur.com/QUZahYt.png"
+                  value: "https://imgur.com/YjPSFS3.png"
+              - column:
+                  name: languages
+                  value: "English, Japanese, Korean"
+              - column:
+                  name: education
+                  value: "MA in Mental Health Counseling, Kyoto University"
               - column:
                   name: experience
                   value: '5'
@@ -372,6 +408,12 @@ databaseChangeLog:
               - column:
                   name: image_url
                   value: "https://imgur.com/5jWJsCD.png"
+              - column:
+                  name: languages
+                  value: "English, Portuguese, Spanish"
+              - column:
+                  name: education
+                  value: "Doctorate in Psychology, University of São Paulo"
               - column:
                   name: experience
                   value: '4'

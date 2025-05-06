@@ -20,6 +20,8 @@ public class PsychologistWithDetailsDto {
     private BigDecimal sessionPrice;
     private String gender;
     private Integer experience;
+    private String languages;
+    private String education;
     private String imageUrl;
     private String meetingUrl;
     private Set<Concern> concerns;
