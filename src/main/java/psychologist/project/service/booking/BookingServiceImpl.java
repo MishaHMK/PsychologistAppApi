@@ -55,6 +55,9 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<LocalDateTime> findAvailableDateTimes(
             LocalDate selectedDate, Long psychologistId) {
+        if (!config.getWorkingDays().contains(selectedDate.getDayOfWeek())) {
+            throw new BookingException("Can't make booking on Saturday or Sunday");
+        }
         List<LocalDateTime> times = receiveMeetingSlots(selectedDate);
         List<LocalDateTime> booked = findAllMeetingsForDay(
                 selectedDate, psychologistId)
@@ -62,6 +65,10 @@ public class BookingServiceImpl implements BookingService {
                 .map(BookingWithPsychologistInfoDto::getStartTime)
                 .toList();
         times.removeAll(booked);
+        if (times.isEmpty()) {
+            throw new BookingException("There is no available times for this day (" +
+                                  selectedDate.toString() + ")");
+        }
         return times;
     }
 
