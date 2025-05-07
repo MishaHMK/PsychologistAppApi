@@ -1,11 +1,17 @@
 package psychologist.project.service.booking;
 
 import jakarta.persistence.EntityNotFoundException;
+
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -55,9 +61,6 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<LocalDateTime> findAvailableDateTimes(
             LocalDate selectedDate, Long psychologistId) {
-        if (!config.getWorkingDays().contains(selectedDate.getDayOfWeek())) {
-            throw new BookingException("Can't make booking on Saturday or Sunday");
-        }
         List<LocalDateTime> times = receiveMeetingSlots(selectedDate);
         List<LocalDateTime> booked = findAllMeetingsForDay(
                 selectedDate, psychologistId)
@@ -65,10 +68,6 @@ public class BookingServiceImpl implements BookingService {
                 .map(BookingWithPsychologistInfoDto::getStartTime)
                 .toList();
         times.removeAll(booked);
-        if (times.isEmpty()) {
-            throw new BookingException("There is no available times for this day ("
-                    + selectedDate.toString() + ")");
-        }
         return times;
     }
 
@@ -128,6 +127,24 @@ public class BookingServiceImpl implements BookingService {
             throw new AccessException("You can't access this booking");
         }
         return bookingMapper.toDetailedDto(booking);
+    }
+
+    @Override
+    public List<LocalDate> getAllLockedDates(Long psychologistId, String yearMonth) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        YearMonth yearMonthValue = YearMonth.parse(yearMonth, formatter);
+        LocalDate date = yearMonthValue.atDay(1);
+        Month month = date.getMonth();
+        int year = date.getYear();
+
+        int daysInMonth = date.getMonth().length(date.isLeapYear());
+        return IntStream.rangeClosed(1, daysInMonth)
+                .mapToObj(day -> LocalDate.of(year, month, day))
+
+                .filter(day -> findAvailableDateTimes(day, psychologistId).isEmpty() ||
+                        (day.getDayOfWeek() == DayOfWeek.SUNDAY ||
+                                day.getDayOfWeek() == DayOfWeek.SATURDAY ))
+                .toList();
     }
 
     private boolean checkAccess(User user, Booking booking) {

@@ -51,6 +51,16 @@ public class BookingController {
                 selectedDate, psychologistId);
     }
 
+    @GetMapping("/lockedDates/{psychologistId}")
+    @Operation(summary = "Get all locked dates for month",
+            description = "Receive all unavailable dates for "
+                    + "psychologist by id on given date (YYYY-MM)")
+    public List<LocalDate> getAllLockedSpots(
+            @PathVariable Long psychologistId,
+            @ParameterObject String selectedDate) {
+        return bookingService.getAllLockedDates(psychologistId, selectedDate);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/{psychologistId}")
     @Operation(summary = "Get all today booked meetings",

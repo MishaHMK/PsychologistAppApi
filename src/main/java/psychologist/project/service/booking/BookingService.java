@@ -16,6 +16,8 @@ public interface BookingService {
 
     List<BookingWithPsychologistInfoDto> getAll(Pageable pageable);
 
+    List<LocalDate> getAllLockedDates(Long psychologistId, String yearMonth);
+
     List<BookingWithPsychologistInfoDto> findAllMeetingsForDay(
             LocalDate selectedDate, Long psychologistId);
 
