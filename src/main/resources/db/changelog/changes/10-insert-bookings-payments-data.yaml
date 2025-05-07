@@ -30,10 +30,10 @@ databaseChangeLog:
             columns:
               - column:
                   name: start_time
-                  valueDate: "2025-05-12T11:00:00"
+                  valueDate: "2025-05-12T09:00:00"
               - column:
                   name: end_time
-                  valueDate: "2025-05-12T11:45:00"
+                  valueDate: "2025-05-12T09:45:00"
               - column:
                   name: user_id
                   valueNumeric: '2'
@@ -46,7 +46,132 @@ databaseChangeLog:
               - column:
                   name: status
                   value: "CONFIRMED"
-
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T10:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T10:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T11:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T11:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T12:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T12:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T13:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T13:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T14:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T14:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T15:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T15:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
         - insert:
             tableName: bookings
             columns:
@@ -68,7 +193,90 @@ databaseChangeLog:
               - column:
                   name: status
                   value: "PENDING"
-
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-12T17:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-12T17:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-14T09:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-14T09:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '1'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-14T12:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-14T12:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '1'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
+        - insert:
+            tableName: bookings
+            columns:
+              - column:
+                  name: start_time
+                  valueDate: "2025-05-14T15:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-05-14T15:45:00"
+              - column:
+                  name: user_id
+                  valueNumeric: '1'
+              - column:
+                  name: psychologist_id
+                  valueNumeric: '2'
+              - column:
+                  name: meeting_url
+                  value: "https://meet.example.com/ghi789"
+              - column:
+                  name: status
+                  value: "PENDING"
         - insert:
             tableName: bookings
             columns:
@@ -90,7 +298,6 @@ databaseChangeLog:
               - column:
                   name: status
                   value: "EXPIRED"
-
         - insert:
             tableName: bookings
             columns:
@@ -112,6 +319,7 @@ databaseChangeLog:
               - column:
                   name: status
                   value: "CANCELED"
+
 
         - insert:
             tableName: payments
