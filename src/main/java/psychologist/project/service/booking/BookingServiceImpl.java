@@ -66,8 +66,8 @@ public class BookingServiceImpl implements BookingService {
                 .toList();
         times.removeAll(booked);
         if (times.isEmpty()) {
-            throw new BookingException("There is no available times for this day (" +
-                                  selectedDate.toString() + ")");
+            throw new BookingException("There is no available times for this day ("
+                    + selectedDate.toString() + ")");
         }
         return times;
     }
