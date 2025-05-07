@@ -1,7 +1,6 @@
 package psychologist.project.service.booking;
 
 import jakarta.persistence.EntityNotFoundException;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -140,10 +139,9 @@ public class BookingServiceImpl implements BookingService {
         int daysInMonth = date.getMonth().length(date.isLeapYear());
         return IntStream.rangeClosed(1, daysInMonth)
                 .mapToObj(day -> LocalDate.of(year, month, day))
-
-                .filter(day -> findAvailableDateTimes(day, psychologistId).isEmpty() ||
-                        (day.getDayOfWeek() == DayOfWeek.SUNDAY ||
-                                day.getDayOfWeek() == DayOfWeek.SATURDAY ))
+                .filter(day -> findAvailableDateTimes(day, psychologistId).isEmpty()
+                        || (day.getDayOfWeek() == DayOfWeek.SUNDAY
+                        || day.getDayOfWeek() == DayOfWeek.SATURDAY))
                 .toList();
     }
 
