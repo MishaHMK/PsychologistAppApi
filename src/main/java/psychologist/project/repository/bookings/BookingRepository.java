@@ -31,6 +31,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             + "OR b.status = 'CONFIRMED')")
     List<Booking> findAllUserMeetings(Long userId);
 
+    List<Booking> findAllBookingsByUserIdAndPsychologistId(
+            Long userId, Long psychologistId);
+
     @Query("SELECT b FROM Booking b "
             + "JOIN FETCH b.psychologist p "
             + "JOIN FETCH p.speciality s "

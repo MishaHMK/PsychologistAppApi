@@ -13,6 +13,9 @@ databaseChangeLog:
                   name: password
                   value: "$2a$12$6acMlxU.6hhwIZb/8IqINO257Ceztl75EsaKEe4YE4Yo3fW.V10gi" #securePassword123
               - column:
+                  name: birth_date
+                  value: "2000-04-12"
+              - column:
                   name: first_name
                   value: "John"
               - column:
@@ -37,6 +40,9 @@ databaseChangeLog:
               - column:
                   name: password
                   value: "$2a$12$6acMlxU.6hhwIZb/8IqINO257Ceztl75EsaKEe4YE4Yo3fW.V10gi" #securePassword123
+              - column:
+                  name: birth_date
+                  value: "2000-08-21"
               - column:
                   name: first_name
                   value: "Lisa"
