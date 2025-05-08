@@ -29,4 +29,6 @@ public interface BookingService {
     BookingDto updateBookingStatus(Long bookingId, UpdateBookingStatusDto updateDto);
 
     BookingWithPsychologistInfoDto getBookingDetailsById(Long bookingId);
+
+    List<BookingDto> getAllUserPsychologistsBookings(Long userId, Long psychologistId);
 }

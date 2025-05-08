@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-users-table
+      id: create-reviews-table
       author: MishaHMK
       changes:
         - createTable:
-            tableName: users
+            tableName: reviews
             columns:
               - column:
                   name: id
@@ -14,44 +14,33 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: email
-                  type: varchar(255)
-                  constraints:
-                    unique: true
-                    nullable: false
-              - column:
-                  name: first_name
+                  name: review_text
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: last_name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: father_name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: password
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: birth_date
+                  name: review_date
                   type: date
                   constraints:
                     nullable: false
               - column:
-                  name: gender
-                  type: enum('FEMALE', 'MALE', 'OTHER')
+                  name: rate
+                  type: integer
                   constraints:
                     nullable: false
               - column:
-                  name: role
-                  type: enum('CUSTOMER', 'ADMIN')
+                  name: sessions_count
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: psychologist_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -60,3 +49,17 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: reviews
+            constraintName: fk_reviews_users
+            referencedColumnNames: id
+            referencedTableName: users
+
+        - addForeignKeyConstraint:
+            baseColumnNames: psychologist_id
+            baseTableName: reviews
+            constraintName: fk_reviews_psychologists
+            referencedColumnNames: id
+            referencedTableName: psychologists

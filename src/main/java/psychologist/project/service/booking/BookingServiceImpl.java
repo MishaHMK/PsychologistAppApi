@@ -145,6 +145,17 @@ public class BookingServiceImpl implements BookingService {
                 .toList();
     }
 
+    @Override
+    public List<BookingDto> getAllUserPsychologistsBookings(
+            Long userId, Long psychologistId) {
+
+        return bookingRepository.findAllBookingsByUserIdAndPsychologistId(
+                userId, psychologistId)
+                .stream()
+                .map(bookingMapper::toDto)
+                .toList();
+    }
+
     private boolean checkAccess(User user, Booking booking) {
         return booking.getUser().getId().equals(user.getId())
                 || user.getRole() == User.Role.ADMIN;
