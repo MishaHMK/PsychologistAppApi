@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -28,8 +27,6 @@ public class CreatePsychologistDto {
             message = "Email must be unique")
     @Email
     private String email;
-    @NotNull(message = "Session price is required")
-    private BigDecimal sessionPrice;
     private String introduction;
     @NotNull(message = "Speciality id is required")
     private Long specialityId;

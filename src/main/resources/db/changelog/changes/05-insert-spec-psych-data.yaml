@@ -149,7 +149,7 @@ databaseChangeLog:
                   value: '8'
               - column:
                   name: session_price
-                  value: '9.99'
+                  value: '499.99'
               - column:
                   name: gender
                   value: 'MALE'
@@ -194,7 +194,7 @@ databaseChangeLog:
                   value: '7'
               - column:
                   name: session_price
-                  value: '8.99'
+                  value: '499.99'
               - column:
                   name: gender
                   value: 'FEMALE'
@@ -239,7 +239,7 @@ databaseChangeLog:
                   value: '2'
               - column:
                   name: session_price
-                  value: '9.99'
+                  value: '199.99'
               - column:
                   name: gender
                   value: 'FEMALE'
@@ -269,7 +269,7 @@ databaseChangeLog:
                   value: "0673344556"
               - column:
                   name: session_price
-                  value: "12.50"
+                  value: "299.99"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl014"
@@ -329,7 +329,7 @@ databaseChangeLog:
                   value: '2'
               - column:
                   name: session_price
-                  value: "15.00"
+                  value: "199.99"
               - column:
                   name: gender
                   value: "FEMALE"
@@ -359,7 +359,7 @@ databaseChangeLog:
                   value: "0691122334"
               - column:
                   name: session_price
-                  value: "11.75"
+                  value: "499.99"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl016"
@@ -419,7 +419,7 @@ databaseChangeLog:
                   value: '4'
               - column:
                   name: session_price
-                  value: "10.25"
+                  value: "299.99"
               - column:
                   name: gender
                   value: "OTHER"

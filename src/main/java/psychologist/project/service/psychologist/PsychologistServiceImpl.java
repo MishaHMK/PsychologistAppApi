@@ -54,6 +54,15 @@ public class PsychologistServiceImpl implements PsychologistService {
                     break;
             }
         }
+        int experience = toCreate.getExperience();
+        if (experience > 0 && experience <= 2) {
+            toCreate.setSessionPrice(BigDecimal.valueOf(199.99));
+        } else if (experience > 2 && experience <= 5) {
+            toCreate.setSessionPrice(BigDecimal.valueOf(299.99));
+        } else if (experience > 5) {
+            toCreate.setSessionPrice(BigDecimal.valueOf(499.99));
+        }
+
         PsychologistDto dto = psychologistMapper.toDto(psychologistRepository.save(toCreate));
         return dto.setSpeciality(findSpecialityById(createDto.getSpecialityId()));
     }

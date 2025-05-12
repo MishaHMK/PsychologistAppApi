@@ -21,7 +21,6 @@ public interface PsychologistMapper {
     @Mapping(source = "approachIds", target = "approaches", qualifiedByName = "approachesByIds")
     @Mapping(source = "concernIds", target = "concerns", qualifiedByName = "concernsByIds")
     @Mapping(source = "specialityId", target = "speciality", qualifiedByName = "specialityFromId")
-    @Mapping(target = "sessionPrice", source = "sessionPrice")
     Psychologist toEntity(CreatePsychologistDto createDto);
 
     @AfterMapping
