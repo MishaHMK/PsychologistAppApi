@@ -3,8 +3,6 @@ package psychologist.project.dto.auth;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;

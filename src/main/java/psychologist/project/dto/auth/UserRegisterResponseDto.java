@@ -1,6 +1,5 @@
 package psychologist.project.dto.auth;
 
-import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
