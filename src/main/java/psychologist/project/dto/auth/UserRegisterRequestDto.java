@@ -3,6 +3,8 @@ package psychologist.project.dto.auth;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
@@ -28,6 +30,8 @@ public class UserRegisterRequestDto {
     private String lastName;
     @NotBlank(message = "Father name is required")
     private String fatherName;
+    @NotNull(message = "Birth date is required")
+    private Date birthDate;
     @NotBlank(message = "Password is required")
     @Length(min = 8, max = 20,
             message = "Password size must be between "

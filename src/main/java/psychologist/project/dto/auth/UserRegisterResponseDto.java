@@ -1,5 +1,6 @@
 package psychologist.project.dto.auth;
 
+import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -13,4 +14,5 @@ public class UserRegisterResponseDto {
     private String fatherName;
     private String gender;
     private String role;
+    private Date birthDate;
 }
