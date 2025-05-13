@@ -30,8 +30,6 @@ public class UserRegisterRequestDto {
     private String lastName;
     @NotBlank(message = "Father name is required")
     private String fatherName;
-    @NotNull(message = "Birth date is required")
-    private Date birthDate;
     @NotBlank(message = "Password is required")
     @Length(min = 8, max = 20,
             message = "Password size must be between "

@@ -42,8 +42,6 @@ databaseChangeLog:
               - column:
                   name: birth_date
                   type: date
-                  constraints:
-                    nullable: false
               - column:
                   name: gender
                   type: enum('FEMALE', 'MALE', 'OTHER')

@@ -14,5 +14,4 @@ public class UserRegisterResponseDto {
     private String fatherName;
     private String gender;
     private String role;
-    private Date birthDate;
 }

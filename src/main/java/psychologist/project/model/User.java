@@ -48,7 +48,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     private LocalDate birthDate;
 
     @Column(nullable = false)
