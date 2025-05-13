@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import psychologist.project.dto.booking.BookingDto;
 import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.booking.CreateBookingDto;
+import psychologist.project.dto.booking.UnauthorizedBookingDto;
 import psychologist.project.dto.booking.UpdateBookingStatusDto;
 
 public interface BookingService {
@@ -17,6 +18,8 @@ public interface BookingService {
     List<BookingWithPsychologistInfoDto> getAll(Pageable pageable);
 
     List<LocalDate> getAllLockedDates(Long psychologistId, String yearMonth);
+
+    BookingDto createUnauthorizedBooking(UnauthorizedBookingDto createDto);
 
     List<BookingWithPsychologistInfoDto> findAllMeetingsForDay(
             LocalDate selectedDate, Long psychologistId);

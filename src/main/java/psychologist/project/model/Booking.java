@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.SQLDelete;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Entity
 @Getter
 @Setter
+@Accessors(chain = true)
 @SQLDelete(sql = "UPDATE bookings "
         + "SET is_deleted = true WHERE id = ?")
 @SQLRestriction(value = "is_deleted = false")

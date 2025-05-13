@@ -42,19 +42,15 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private String fatherName;
 
-    @Column(nullable = false)
     private String password;
 
     private LocalDate birthDate;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
