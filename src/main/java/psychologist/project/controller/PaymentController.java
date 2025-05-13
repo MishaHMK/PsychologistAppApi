@@ -68,7 +68,6 @@ public class PaymentController {
         return paymentService.renew(paymentId);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @PostMapping
     @Operation(summary = "Create payment",
             description = "Create payment entity with session based on booking data")

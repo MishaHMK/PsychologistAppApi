@@ -12,6 +12,7 @@ import psychologist.project.dto.auth.UserLoginRequestDto;
 import psychologist.project.dto.auth.UserLoginResponseDto;
 import psychologist.project.dto.auth.UserRegisterRequestDto;
 import psychologist.project.dto.auth.UserRegisterResponseDto;
+import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.AuthenticationService;
 import psychologist.project.service.user.UserService;
 

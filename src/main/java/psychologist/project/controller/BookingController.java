@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import psychologist.project.dto.booking.BookingDto;
 import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.booking.CreateBookingDto;
+import psychologist.project.dto.booking.UnauthorizedBookingDto;
 import psychologist.project.dto.booking.UpdateBookingStatusDto;
 import psychologist.project.service.booking.BookingService;
 
@@ -87,6 +88,14 @@ public class BookingController {
     public BookingDto makeBooking(
             @Valid @RequestBody CreateBookingDto createBookingDto) {
         return bookingService.createBooking(createBookingDto);
+    }
+
+    @PostMapping("/unauthorized")
+    @Operation(summary = "Create payment as unauthorized user",
+            description = "Create payment entity with session based on booking data")
+    public BookingDto makeBookingNotAuth(
+            @Valid @RequestBody UnauthorizedBookingDto createBookingDto) {
+        return bookingService.createUnauthorizedBooking(createBookingDto);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")

@@ -19,15 +19,20 @@ import psychologist.project.config.BookingConfig;
 import psychologist.project.dto.booking.BookingDto;
 import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.booking.CreateBookingDto;
+import psychologist.project.dto.booking.UnauthorizedBookingDto;
 import psychologist.project.dto.booking.UpdateBookingStatusDto;
 import psychologist.project.exception.AccessException;
 import psychologist.project.exception.BookingException;
 import psychologist.project.mapper.BookingMapper;
 import psychologist.project.model.Booking;
+import psychologist.project.model.Psychologist;
 import psychologist.project.model.User;
 import psychologist.project.repository.bookings.BookingRepository;
+import psychologist.project.repository.psychologist.PsychologistRepository;
+import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
 import psychologist.project.service.psychologist.PsychologistService;
+import psychologist.project.service.user.UserService;
 
 @Service
 @Transactional
@@ -35,8 +40,11 @@ import psychologist.project.service.psychologist.PsychologistService;
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final PsychologistService psychologistService;
+    private final PsychologistRepository psychologistRepository;
+    private final UserService userService;
     private final BookingMapper bookingMapper;
     private final BookingConfig config;
+    private final UserRepository userRepository;
 
     @Override
     public List<BookingWithPsychologistInfoDto> findAllMeetingsForDay(
@@ -82,6 +90,30 @@ public class BookingServiceImpl implements BookingService {
                         createDto.getPsychologistId())
                 .getMeetingUrl());
         toCreate.setStatus(Booking.BookingStatus.PENDING);
+        bookingRepository.save(toCreate);
+        return bookingMapper.toDto(toCreate);
+    }
+
+    @Override
+    public BookingDto createUnauthorizedBooking(UnauthorizedBookingDto createDto) {
+        verifyMeetingPossibilityUnauthorized(
+                createDto.getStartTime(), createDto.getPsychologistId());
+        User unauthorized = userRepository.findByEmail(createDto.getEmail()).get();
+        if (unauthorized.getEmail() == null) {
+            unauthorized = userService.registerUnauthorized(createDto);
+        }
+        Psychologist psychologist = psychologistRepository
+                .getById(createDto.getPsychologistId());
+        Booking toCreate = new Booking()
+                .setStartTime(createDto.getStartTime())
+                .setUser(unauthorized)
+                .setEndTime(createDto.getStartTime()
+                    .plusMinutes(config.getSessionLength()))
+                .setMeetingUrl(psychologist.getMeetingUrl())
+                .setPsychologist(psychologist)
+                .setEndTime(createDto.getStartTime()
+                        .plusMinutes(config.getSessionLength()))
+                .setStatus(Booking.BookingStatus.PENDING);
         bookingRepository.save(toCreate);
         return bookingMapper.toDto(toCreate);
     }
@@ -183,6 +215,24 @@ public class BookingServiceImpl implements BookingService {
                     + System.lineSeparator()
                     + makeDateString(dateTime)
             );
+        }
+
+        List<LocalDateTime> availableDateTimes =
+                findAvailableDateTimes(dateTime.toLocalDate(), psychologistId);
+        if (!availableDateTimes.contains(dateTime)) {
+            throw new BookingException("This time is not available! "
+                    + (availableDateTimes.size() < 9
+                    ? "You can still book a meeting for these hours: "
+                    + hourList(availableDateTimes)
+                    : "There is no available times for this day ("
+                    + dateTime.toLocalDate().toString() + ")"));
+        }
+    }
+
+    private void verifyMeetingPossibilityUnauthorized(
+            LocalDateTime dateTime, Long psychologistId) {
+        if (!config.getWorkingDays().contains(dateTime.getDayOfWeek())) {
+            throw new BookingException("Can't make booking on Saturday or Sunday");
         }
 
         List<LocalDateTime> availableDateTimes =
