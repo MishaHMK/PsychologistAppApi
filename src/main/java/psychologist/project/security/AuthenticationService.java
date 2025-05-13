@@ -1,5 +1,6 @@
 package psychologist.project.security;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,8 +12,6 @@ import psychologist.project.dto.auth.UserLoginResponseDto;
 import psychologist.project.model.User;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.jwt.JwtUtil;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

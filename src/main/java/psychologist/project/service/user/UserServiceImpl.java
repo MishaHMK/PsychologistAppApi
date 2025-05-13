@@ -1,6 +1,7 @@
 package psychologist.project.service.user;
 
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,6 @@ import psychologist.project.model.User;
 import psychologist.project.repository.bookings.BookingRepository;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
-
-import java.util.Optional;
 
 @Transactional
 @Service
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> byEmail = userRepository.findByEmail(email);
         if (byEmail.isPresent() && !byEmail.get().getPassword().isEmpty()) {
             throw new RegistrationException("User with email "
-                    + email+ " already registered");
+                    + email + " already registered");
         }
     }
 
