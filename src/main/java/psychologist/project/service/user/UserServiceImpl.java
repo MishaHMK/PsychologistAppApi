@@ -28,22 +28,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRegisterResponseDto save(UserRegisterRequestDto requestDto) {
         String email = requestDto.getEmail();
-        checkUserRegistered(email);
-        /* if (requestDto.getPassword() != null) {
-            Optional<User> byEmail = userRepository.findByEmail(email);
-            if (byEmail.isPresent() && ) {
-
-            }
-        }*/
+        Optional<User> byEmail = userRepository.findByEmail(email);
+        if (byEmail.isPresent()) {
+            checkUserRegistered(byEmail.get());
+        }
         User user = userMapper.toUser(requestDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        if (byEmail.isPresent() && byEmail.get().getPassword() == null) {
+            userRepository.save(user.setId(byEmail.get().getId()));
+        } else {
+            userRepository.save(user);
+        }
         return userMapper.toResponse(user);
     }
 
     @Override
     public User registerUnauthorized(UnauthorizedBookingDto createDto) {
-        checkUserRegistered(createDto.getEmail());
+        checkUserRegisteredByEmail(createDto.getEmail());
         User user = new User()
                 .setEmail(createDto.getEmail())
                 .setFirstName(createDto.getFirstName())
@@ -51,11 +52,18 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    private void checkUserRegistered(String email) {
+    private void checkUserRegisteredByEmail(String email) {
         Optional<User> byEmail = userRepository.findByEmail(email);
         if (byEmail.isPresent() && !byEmail.get().getPassword().isEmpty()) {
             throw new RegistrationException("User with email "
-                    + email + " already registered");
+                    + email + " is already registered");
+        }
+    }
+
+    private void checkUserRegistered(User user) {
+        if (user.getPassword() != null) {
+            throw new RegistrationException("User with email "
+                    + user.getEmail() + " is already registered");
         }
     }
 

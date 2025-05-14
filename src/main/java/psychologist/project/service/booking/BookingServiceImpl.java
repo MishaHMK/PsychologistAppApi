@@ -10,6 +10,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -98,15 +99,15 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto createUnauthorizedBooking(UnauthorizedBookingDto createDto) {
         verifyMeetingPossibilityUnauthorized(
                 createDto.getStartTime(), createDto.getPsychologistId());
-        User unauthorized = userRepository.findByEmail(createDto.getEmail()).get();
-        if (unauthorized.getEmail() == null) {
-            unauthorized = userService.registerUnauthorized(createDto);
+        Optional<User> unauthorized = userRepository.findByEmail(createDto.getEmail());
+        if (unauthorized.isEmpty() || unauthorized.get().getEmail() == null) {
+            unauthorized = Optional.of(userService.registerUnauthorized(createDto));
         }
         Psychologist psychologist = psychologistRepository
                 .getById(createDto.getPsychologistId());
         Booking toCreate = new Booking()
                 .setStartTime(createDto.getStartTime())
-                .setUser(unauthorized)
+                .setUser(unauthorized.get())
                 .setEndTime(createDto.getStartTime()
                     .plusMinutes(config.getSessionLength()))
                 .setMeetingUrl(psychologist.getMeetingUrl())
