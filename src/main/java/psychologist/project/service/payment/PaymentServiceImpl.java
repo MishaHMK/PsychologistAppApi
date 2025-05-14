@@ -98,6 +98,7 @@ public class PaymentServiceImpl implements PaymentService {
             }
             Payment payment = findBySessionId(sessionId);
             payment.setStatus(Payment.PaymentStatus.CANCELED);
+            bookingService.setBookingStatusCancelled(payment.getBooking().getId());
             return paymentMapper.toDto(payment);
         } catch (StripeException e) {
             throw new PaymentException("Can't find payment session");
