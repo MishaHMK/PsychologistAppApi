@@ -18,5 +18,5 @@ public interface PaymentService {
 
     PaymentDto renew(Long paymentId);
 
-    PaymentDto cancelPaymentForBooking(Long bookingId);
+    void cancelPaymentForBooking(Long bookingId);
 }

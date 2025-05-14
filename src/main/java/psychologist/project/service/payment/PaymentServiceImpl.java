@@ -106,14 +106,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDto cancelPaymentForBooking(Long bookingId) {
-        Payment byBookingId = paymentsRepository.findByBookingId(bookingId)
-                .orElseThrow(() ->
-                       new EntityNotFoundException("Booking with id: "
-                               + bookingId + " not found")
-                );
-
-        return cancel(byBookingId.getSessionId());
+    public void cancelPaymentForBooking(Long bookingId) {
+        Optional<Payment> byBookingId = paymentsRepository.findByBookingId(bookingId);
+        if (byBookingId.isPresent()) {
+            cancel(byBookingId.get().getSessionId());
+        }
     }
 
     @Override
