@@ -139,14 +139,14 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingDto setBookingStatusCancelled(Long bookingId) {
-        User loggedInUser = SecurityUtil.getLoggedInUser();
+        //User loggedInUser = SecurityUtil.getLoggedInUser();
         Booking booking = getBookingById(bookingId);
         if (booking.getStatus().equals(Booking.BookingStatus.EXPIRED)) {
             throw new BookingException("You can't cancel expired booking");
         }
-        if (!checkAccess(loggedInUser, booking)) {
+        /*if (!checkAccess(loggedInUser, booking)) {
             throw new AccessException("You can't access this booking");
-        }
+        }*/
         booking.setStatus(Booking.BookingStatus.CANCELED);
         return bookingMapper.toDto(bookingRepository.save(booking));
     }

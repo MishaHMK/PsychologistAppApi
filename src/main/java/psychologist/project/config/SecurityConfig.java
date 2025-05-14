@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 antMatcher("/auth/**"),
                                 antMatcher("/swagger-ui/**"),
                                 antMatcher("/v3/api-docs/**"),
+                                antMatcher(HttpMethod.POST,"/payments"),
                                 antMatcher("/payments/success"),
                                 antMatcher("/payments/cancel"),
                                 antMatcher("/bookings/unauthorized"),

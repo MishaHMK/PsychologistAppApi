@@ -32,6 +32,9 @@ public class BookingConfig {
 
     private List<DayOfWeek> workingDays;
 
+    @Value("${payment.redirect}")
+    private String redirect;
+
     @PostConstruct
     public void init() {
         this.startTime = LocalTime.parse(startTimeString);

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import psychologist.project.dto.payment.CreatePaymentDto;
 import psychologist.project.dto.payment.PaymentDto;
+import psychologist.project.dto.payment.PaymentPsychologistDto;
 
 public interface PaymentService {
     List<PaymentDto> getAll(Pageable pageable);
@@ -12,9 +13,9 @@ public interface PaymentService {
 
     PaymentDto save(CreatePaymentDto createPaymentDto);
 
-    PaymentDto success(String sessionId);
+    PaymentPsychologistDto success(String sessionId);
 
-    PaymentDto cancel(String sessionId);
+    PaymentPsychologistDto cancel(String sessionId);
 
     PaymentDto renew(Long paymentId);
 

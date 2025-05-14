@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.payment.CreatePaymentDto;
 import psychologist.project.dto.payment.PaymentDto;
+import psychologist.project.dto.payment.PaymentPsychologistDto;
 import psychologist.project.exception.PaymentException;
 import psychologist.project.mapper.BookingMapper;
 import psychologist.project.mapper.PaymentMapper;
@@ -70,7 +71,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDto success(String sessionId) {
+    public PaymentPsychologistDto success(String sessionId) {
         try {
             Payment payment = findBySessionId(sessionId);
             if (payment.getStatus().equals(Payment.PaymentStatus.CANCELED)) {
@@ -82,24 +83,25 @@ public class PaymentServiceImpl implements PaymentService {
                         + " is not paid");
             }
             payment.setStatus(Payment.PaymentStatus.PAID);
-            return paymentMapper.toDto(payment);
+            return paymentMapper.toDetailedDto(payment);
         } catch (StripeException e) {
             throw new PaymentException("Can't find payment session");
         }
     }
 
     @Override
-    public PaymentDto cancel(String sessionId) {
+    public PaymentPsychologistDto cancel(String sessionId) {
         try {
             Session session = stripeUtil.receiveSession(sessionId);
             if (!session.getStatus().equals(SESSION_OPEN_STATUS)) {
                 throw new PaymentException("Payment with session id: " + sessionId
                         + " is not open!");
             }
+
             Payment payment = findBySessionId(sessionId);
             payment.setStatus(Payment.PaymentStatus.CANCELED);
             bookingService.setBookingStatusCancelled(payment.getBooking().getId());
-            return paymentMapper.toDto(payment);
+            return paymentMapper.toDetailedDto(payment);
         } catch (StripeException e) {
             throw new PaymentException("Can't find payment session");
         }

@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
+import psychologist.project.config.BookingConfig;
 import psychologist.project.dto.payment.CreatePaymentDto;
 import psychologist.project.dto.payment.PaymentDto;
+import psychologist.project.dto.payment.PaymentPsychologistDto;
 import psychologist.project.service.payment.PaymentService;
 
 @Tag(name = "Payment controller",
@@ -26,6 +29,8 @@ import psychologist.project.service.payment.PaymentService;
 @RequestMapping("/payments")
 public class PaymentController {
     private final PaymentService paymentService;
+
+    private final BookingConfig bookingConfig;
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping()
@@ -49,15 +54,17 @@ public class PaymentController {
     @GetMapping("/success")
     @Operation(summary = "Confirm payment",
             description = "Confirm payment with given session")
-    public PaymentDto confirmPayment(@RequestParam(required = false) String sessionId) {
-        return paymentService.success(sessionId);
+    public RedirectView confirmPayment(@RequestParam(required = false) String sessionId) {
+        PaymentPsychologistDto success = paymentService.success(sessionId);
+        return new RedirectView(bookingConfig.getRedirect() + success.getPsychologistId());
     }
 
     @GetMapping("/cancel")
     @Operation(summary = "Cancel payment",
             description = "Cancel payment with given session")
-    public PaymentDto cancelPayment(@RequestParam(required = false) String sessionId) {
-        return paymentService.cancel(sessionId);
+    public RedirectView cancelPayment(@RequestParam(required = false) String sessionId) {
+        PaymentPsychologistDto cancel = paymentService.cancel(sessionId);
+        return new RedirectView(bookingConfig.getRedirect() + cancel.getPsychologistId());
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
