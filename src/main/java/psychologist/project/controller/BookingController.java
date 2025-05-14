@@ -24,6 +24,7 @@ import psychologist.project.dto.booking.CreateBookingDto;
 import psychologist.project.dto.booking.UnauthorizedBookingDto;
 import psychologist.project.dto.booking.UpdateBookingStatusDto;
 import psychologist.project.service.booking.BookingService;
+import psychologist.project.service.payment.PaymentService;
 
 @Tag(name = "Booking controller", description = "Booking management endpoint")
 @RestController
@@ -31,6 +32,7 @@ import psychologist.project.service.booking.BookingService;
 @RequestMapping("/bookings")
 public class BookingController {
     private final BookingService bookingService;
+    private final PaymentService paymentService;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping()
@@ -112,6 +114,7 @@ public class BookingController {
     @Operation(summary = "Cancel booking by id",
             description = "Set booking status cancelled")
     public BookingDto cancelBooking(@PathVariable Long bookingId) {
+        paymentService.cancelPaymentForBooking(bookingId);
         return bookingService.setBookingStatusCancelled(bookingId);
     }
 }

@@ -17,4 +17,6 @@ public interface PaymentService {
     PaymentDto cancel(String sessionId);
 
     PaymentDto renew(Long paymentId);
+
+    PaymentDto cancelPaymentForBooking(Long bookingId);
 }

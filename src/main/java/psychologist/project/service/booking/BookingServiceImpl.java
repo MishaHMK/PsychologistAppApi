@@ -26,15 +26,12 @@ import psychologist.project.exception.AccessException;
 import psychologist.project.exception.BookingException;
 import psychologist.project.mapper.BookingMapper;
 import psychologist.project.model.Booking;
-import psychologist.project.model.Payment;
 import psychologist.project.model.Psychologist;
 import psychologist.project.model.User;
 import psychologist.project.repository.bookings.BookingRepository;
-import psychologist.project.repository.payments.PaymentsRepository;
 import psychologist.project.repository.psychologist.PsychologistRepository;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
-import psychologist.project.service.payment.PaymentService;
 import psychologist.project.service.psychologist.PsychologistService;
 import psychologist.project.service.user.UserService;
 
@@ -45,8 +42,6 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final PsychologistService psychologistService;
     private final PsychologistRepository psychologistRepository;
-    private final PaymentService paymentService;
-    private final PaymentsRepository paymentsRepository;
     private final UserService userService;
     private final BookingMapper bookingMapper;
     private final BookingConfig config;
@@ -153,10 +148,6 @@ public class BookingServiceImpl implements BookingService {
             throw new AccessException("You can't access this booking");
         }
         booking.setStatus(Booking.BookingStatus.CANCELED);
-        Optional<Payment> byBookingId = paymentsRepository.findByBookingId(bookingId);
-        if (byBookingId.isPresent()) {
-            paymentService.cancel(byBookingId.get().getSessionId());
-        }
         return bookingMapper.toDto(bookingRepository.save(booking));
     }
 
