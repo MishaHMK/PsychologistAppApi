@@ -170,7 +170,7 @@ public class BookingServiceImpl implements BookingService {
         int year = date.getYear();
 
         int daysInMonth = date.getMonth().length(date.isLeapYear());
-        return IntStream.rangeClosed(1, daysInMonth)
+        return IntStream.rangeClosed(LocalDate.now().getDayOfMonth(), daysInMonth)
                 .mapToObj(day -> LocalDate.of(year, month, day))
                 .filter(day -> findAvailableDateTimes(day, psychologistId).isEmpty()
                         || (day.getDayOfWeek() == DayOfWeek.SUNDAY

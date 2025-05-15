@@ -47,6 +47,8 @@ public class SecurityConfig {
                                 antMatcher("/payments/success"),
                                 antMatcher("/payments/cancel"),
                                 antMatcher("/bookings/unauthorized"),
+                                antMatcher("/bookings/free_spots/**"),
+                                antMatcher("/bookings/lockedDates/**"),
                                 antMatcher(HttpMethod.GET, "/psychologists/**"),
                                 antMatcher(HttpMethod.GET, "/filter-data/**"))
                         .permitAll()
