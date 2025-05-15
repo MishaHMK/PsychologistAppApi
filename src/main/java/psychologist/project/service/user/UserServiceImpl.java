@@ -12,7 +12,6 @@ import psychologist.project.dto.user.UserDto;
 import psychologist.project.exception.RegistrationException;
 import psychologist.project.mapper.UserMapper;
 import psychologist.project.model.User;
-import psychologist.project.repository.bookings.BookingRepository;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
 
@@ -21,7 +20,6 @@ import psychologist.project.security.SecurityUtil;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final BookingRepository bookingRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
@@ -70,5 +68,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getCurrentUserData() {
         return userMapper.toUserDto(SecurityUtil.getLoggedInUser());
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 }

@@ -14,4 +14,6 @@ public interface UserService {
     User registerUnauthorized(UnauthorizedBookingDto createDto) throws RegistrationException;
 
     UserDto getCurrentUserData();
+
+    void deleteUserById(Long id);
 }
