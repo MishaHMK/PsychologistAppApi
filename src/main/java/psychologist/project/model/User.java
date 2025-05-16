@@ -14,8 +14,6 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,9 +22,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 @Setter
 @Accessors(chain = true)
-@SQLDelete(sql = "UPDATE users SET is_deleted = true,"
+/*@SQLDelete(sql = "UPDATE users SET is_deleted = true,"
         + " password = 'REMOVED' WHERE id = ?")
-@SQLRestriction(value = "is_deleted = false")
+@SQLRestriction(value = "is_deleted = false")*/
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -54,8 +52,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
-    private boolean isDeleted = false;
+    /*@Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean isDeleted = false;*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,10 +70,10 @@ public class User implements UserDetails {
         return password;
     }
 
-    @Override
+    /*@Override
     public boolean isEnabled() {
         return !isDeleted;
-    }
+    }*/
 
     public enum Role {
         ADMIN,

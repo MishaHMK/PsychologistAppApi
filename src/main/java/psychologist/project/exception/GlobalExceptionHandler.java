@@ -58,6 +58,13 @@ public class GlobalExceptionHandler {
                 HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<Map<String, Object>> handleSecurityException(
+            SecurityException ex) {
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.FORBIDDEN);
+    }
+
     private Map<String, Object> buildExceptionResponse(Throwable ex) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
