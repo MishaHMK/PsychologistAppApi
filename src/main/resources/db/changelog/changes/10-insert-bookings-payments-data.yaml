@@ -704,7 +704,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: status
-                  value: PAID
+                  value: "PAID"
               - column:
                   name: booking_id
                   valueNumeric: '1'
