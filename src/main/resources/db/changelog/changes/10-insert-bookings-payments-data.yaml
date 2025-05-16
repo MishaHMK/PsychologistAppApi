@@ -23,7 +23,7 @@ databaseChangeLog:
                   value: "https://meet.example.com/abc123"
               - column:
                   name: status
-                  value: "COMPLETED"
+                  value: "CONFIRMED"
 
         - insert:
             tableName: bookings
