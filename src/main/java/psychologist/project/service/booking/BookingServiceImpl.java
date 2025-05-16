@@ -153,11 +153,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingWithPsychologistInfoDto getBookingDetailsById(Long bookingId) {
-        User loggedInUser = SecurityUtil.getLoggedInUser();
+        //User loggedInUser = SecurityUtil.getLoggedInUser();
         Booking booking = getBookingById(bookingId);
-        if (!checkAccess(loggedInUser, booking)) {
+        /*if (!checkAccess(loggedInUser, booking)) {
             throw new AccessException("You can't access this booking");
-        }
+        }*/
         return bookingMapper.toDetailedDto(booking);
     }
 
