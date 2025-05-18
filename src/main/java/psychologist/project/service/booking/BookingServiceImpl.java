@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.booking.CreateBookingDto;
 import psychologist.project.dto.booking.UnauthorizedBookingDto;
 import psychologist.project.dto.booking.UpdateBookingStatusDto;
+import psychologist.project.dto.user.UserDto;
 import psychologist.project.exception.AccessException;
 import psychologist.project.exception.BookingException;
 import psychologist.project.mapper.BookingMapper;
@@ -32,6 +34,7 @@ import psychologist.project.repository.bookings.BookingRepository;
 import psychologist.project.repository.psychologist.PsychologistRepository;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
+import psychologist.project.service.email.EmailService;
 import psychologist.project.service.psychologist.PsychologistService;
 import psychologist.project.service.user.UserService;
 
@@ -46,6 +49,10 @@ public class BookingServiceImpl implements BookingService {
     private final BookingMapper bookingMapper;
     private final BookingConfig config;
     private final UserRepository userRepository;
+    private final EmailService emailService;
+
+    @Value("${backend.url}")
+    private String backendUrl;
 
     @Override
     public List<BookingWithPsychologistInfoDto> findAllMeetingsForDay(
@@ -92,6 +99,7 @@ public class BookingServiceImpl implements BookingService {
                 .getMeetingUrl());
         toCreate.setStatus(Booking.BookingStatus.PENDING);
         bookingRepository.save(toCreate);
+        confirmBooking(userService.getCurrentUserData(), toCreate);
         return bookingMapper.toDto(toCreate);
     }
 
@@ -300,5 +308,18 @@ public class BookingServiceImpl implements BookingService {
                 .stream()
                 .map(BookingDto::getStartTime)
                 .toList();
+    }
+
+    private void confirmBooking(UserDto user, Booking booking) {
+        String paymentUrl = backendUrl + "api/payments/create?bookingId=" + booking.getId();
+        String html = "<h1>Booking created</h1>"
+                + "<p>Hello " + user.firstName() + ",</p>"
+                + "<p>Your meeting has been created</p>"
+                + "<p>Date: " + booking.getStartTime() + " </p>"
+                + "<p>You can confirm this meeting with payment on website"
+                + "or in this email by link: "
+                + "<a href=\"" + paymentUrl + "\">Create Payment</a>";
+
+        emailService.sendHtmlEmail(user.email(), "Your booking has been created", html);
     }
 }

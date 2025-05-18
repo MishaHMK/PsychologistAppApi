@@ -1,5 +1,7 @@
 package psychologist.project.service.payment;
 
+import static psychologist.project.model.Payment.PaymentStatus;
+
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,20 +13,25 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.payment.CreatePaymentDto;
 import psychologist.project.dto.payment.PaymentDto;
 import psychologist.project.dto.payment.PaymentPsychologistDto;
+import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 import psychologist.project.exception.PaymentException;
 import psychologist.project.mapper.BookingMapper;
 import psychologist.project.mapper.PaymentMapper;
 import psychologist.project.model.Booking;
 import psychologist.project.model.Payment;
+import psychologist.project.model.User;
 import psychologist.project.repository.bookings.BookingRepository;
 import psychologist.project.repository.payments.PaymentsRepository;
+import psychologist.project.repository.user.UserRepository;
 import psychologist.project.service.booking.BookingService;
+import psychologist.project.service.email.EmailService;
 import psychologist.project.utils.StripeUtil;
 
 @Service
@@ -41,6 +48,8 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentMapper paymentMapper;
     private final PaymentsRepository paymentsRepository;
     private final BookingRepository bookingsRepository;
+    private final EmailService emailService;
+    private final UserRepository userRepository;
 
     @Override
     public List<PaymentDto> getAll(Pageable pageable) {
@@ -63,7 +72,11 @@ public class PaymentServiceImpl implements PaymentService {
         Long bookingId = createPaymentDto.getBookingId();
         Optional<Payment> byBookingId = paymentsRepository.findByBookingId(bookingId);
         if (byBookingId.isPresent()) {
-            throw new PaymentException("Payment already exists");
+            if (byBookingId.get().getStatus().equals(PaymentStatus.PAID)) {
+                throw new PaymentException("Payment is already paid");
+            } else {
+                paymentsRepository.delete(byBookingId.get());
+            }
         }
         BookingWithPsychologistInfoDto bookingDetailsById =
                 bookingService.getBookingDetailsById(bookingId);
@@ -74,7 +87,7 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentPsychologistDto success(String sessionId) {
         try {
             Payment payment = findBySessionId(sessionId);
-            if (payment.getStatus().equals(Payment.PaymentStatus.CANCELED)) {
+            if (payment.getStatus().equals(PaymentStatus.CANCELED)) {
                 throw new PaymentException("Payment is already cancelled");
             }
             Session session = stripeUtil.receiveSession(sessionId);
@@ -82,8 +95,12 @@ public class PaymentServiceImpl implements PaymentService {
                 throw new PaymentException("Payment with session id: " + sessionId
                         + " is not paid");
             }
-            payment.setStatus(Payment.PaymentStatus.PAID);
-            return paymentMapper.toDetailedDto(payment);
+            payment.setStatus(PaymentStatus.PAID);
+            PaymentPsychologistDto detailedDto = paymentMapper.toDetailedDto(payment);
+            BookingWithPsychologistInfoDto bookingDetailsById =
+                    bookingService.getBookingDetailsById(payment.getBooking().getId());
+            onConfirmPayment(bookingDetailsById);
+            return detailedDto;
         } catch (StripeException e) {
             throw new PaymentException("Can't find payment session");
         }
@@ -99,8 +116,11 @@ public class PaymentServiceImpl implements PaymentService {
             }
 
             Payment payment = findBySessionId(sessionId);
-            payment.setStatus(Payment.PaymentStatus.CANCELED);
+            payment.setStatus(PaymentStatus.CANCELED);
             bookingService.setBookingStatusCancelled(payment.getBooking().getId());
+            BookingWithPsychologistInfoDto bookingDetailsById =
+                    bookingService.getBookingDetailsById(payment.getBooking().getId());
+            onCancelPayment(bookingDetailsById);
             return paymentMapper.toDetailedDto(payment);
         } catch (StripeException e) {
             throw new PaymentException("Can't find payment session");
@@ -124,7 +144,7 @@ public class PaymentServiceImpl implements PaymentService {
             Session newSession = newSession(paymentById.getAmount());
             paymentById.setSessionId(newSession.getId())
                     .setSessionUrl(new URL(newSession.getUrl()));
-            paymentById.setStatus(Payment.PaymentStatus.PENDING);
+            paymentById.setStatus(PaymentStatus.PENDING);
             paymentsRepository.save(paymentById);
         } catch (MalformedURLException e) {
             throw new PaymentException("Url format is wrong");
@@ -176,7 +196,9 @@ public class PaymentServiceImpl implements PaymentService {
                     .setStatus(Payment.PaymentStatus.PENDING)
                     .setSessionId(session.getId())
                     .setSessionUrl(new URL(session.getUrl()));
-            return paymentMapper.toDto(paymentsRepository.save(payment));
+            PaymentDto dto = paymentMapper.toDto(paymentsRepository.save(payment));
+            onPaymentCreation(dto, bookingData);
+            return dto;
         } catch (MalformedURLException e) {
             throw new PaymentException("Url format is wrong");
         }
@@ -188,5 +210,59 @@ public class PaymentServiceImpl implements PaymentService {
         } catch (StripeException e) {
             throw new PaymentException("Can't create payment session");
         }
+    }
+
+    @Async
+    public void onPaymentCreation(PaymentDto paymentDto,
+                               BookingWithPsychologistInfoDto bookingData) {
+        User user = userRepository.findById(bookingData.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
+        PsychologistWithDetailsDto psychologist = bookingData.getPsychologistDto();
+        String html = "<h1>Payment is ready</h1>"
+                + "<p>Hello! "
+                + "<p>Your payment has been created for booking</p>"
+                + "<p>Date: " + bookingData.getStartTime() + " </p>"
+                + "<p>Psychologist: " + psychologist.getFirstName()
+                + " " + psychologist.getLastName() + " "
+                + psychologist.getFatherName() + " </p>"
+                + "<p> You can complete your payment</p>"
+                + "<a href=\"" + paymentDto.getSessionUrl()
+                + "\">Payment</a>";
+
+        emailService.sendHtmlEmail(user.getEmail(), "Your payment has been created", html);
+    }
+
+    @Async
+    public void onCancelPayment(BookingWithPsychologistInfoDto bookingData) {
+        User user = userRepository.findById(bookingData.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
+        PsychologistWithDetailsDto psychologist = bookingData.getPsychologistDto();
+        String html = "<h1>You payment is canceled</h1>"
+                + "<p>Hello! "
+                + "<p>Your payment has been canceled for booking</p>"
+                + "<p>Date: " + bookingData.getStartTime() + " </p>"
+                + "<p>Psychologist: " + psychologist.getFirstName()
+                + " " + psychologist.getLastName() + " "
+                + psychologist.getFatherName() + " </p>";
+
+        emailService.sendHtmlEmail(user.getEmail(), "Your payment has been canceled", html);
+    }
+
+    @Async
+    public void onConfirmPayment(BookingWithPsychologistInfoDto bookingData) {
+        User user = userRepository.findById(bookingData.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
+        PsychologistWithDetailsDto psychologist = bookingData.getPsychologistDto();
+        String html = "<h1>You payment is confirmed</h1>"
+                + "<p>Hello! "
+                + "<p>Your payment has been accepted for booking</p>"
+                + "<p>Date: " + bookingData.getStartTime() + " </p>"
+                + "<p>Meeting: " + "<a href=\"" + bookingData.getMeetingUrl()
+                + "\">Proceed</a>"
+                + "<p>Psychologist: " + psychologist.getFirstName()
+                + " " + psychologist.getLastName() + " "
+                + psychologist.getFatherName() + " </p>";
+
+        emailService.sendHtmlEmail(user.getEmail(), "Your payment has been confirmed", html);
     }
 }
