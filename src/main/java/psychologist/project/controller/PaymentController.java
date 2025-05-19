@@ -81,4 +81,11 @@ public class PaymentController {
     public PaymentDto createPayment(@RequestBody CreatePaymentDto createPaymentDto) {
         return paymentService.save(createPaymentDto);
     }
+
+    @GetMapping("create")
+    @Operation(summary = "Create payment by url",
+            description = "Create payment entity as unauthorized user")
+    public PaymentDto createPaymentFromUrl(@RequestParam Long bookingId) {
+        return paymentService.save(new CreatePaymentDto().setBookingId(bookingId));
+    }
 }

@@ -32,6 +32,7 @@ import psychologist.project.repository.bookings.BookingRepository;
 import psychologist.project.repository.psychologist.PsychologistRepository;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
+import psychologist.project.service.email.MessageSenderService;
 import psychologist.project.service.psychologist.PsychologistService;
 import psychologist.project.service.user.UserService;
 
@@ -46,6 +47,7 @@ public class BookingServiceImpl implements BookingService {
     private final BookingMapper bookingMapper;
     private final BookingConfig config;
     private final UserRepository userRepository;
+    private final MessageSenderService messageSenderService;
 
     @Override
     public List<BookingWithPsychologistInfoDto> findAllMeetingsForDay(
@@ -92,6 +94,7 @@ public class BookingServiceImpl implements BookingService {
                 .getMeetingUrl());
         toCreate.setStatus(Booking.BookingStatus.PENDING);
         bookingRepository.save(toCreate);
+        messageSenderService.onCreateBooking(toCreate);
         return bookingMapper.toDto(toCreate);
     }
 
@@ -143,6 +146,9 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = getBookingById(bookingId);
         if (booking.getStatus().equals(Booking.BookingStatus.EXPIRED)) {
             throw new BookingException("You can't cancel expired booking");
+        }
+        if (booking.getStatus().equals(Booking.BookingStatus.CANCELED)) {
+            throw new BookingException("This booking is already canceled");
         }
         /*if (!checkAccess(loggedInUser, booking)) {
             throw new AccessException("You can't access this booking");

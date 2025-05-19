@@ -1,0 +1,186 @@
+databaseChangeLog:
+- changeSet:
+    id: insert-reviews-data
+    author: MishaHMK
+    changes:
+      # User 1, Psychologist 1
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Helpful and understanding." }
+            - column: { name: review_date, valueDate: "2025-04-01" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 4 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 1 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Very professional." }
+            - column: { name: review_date, valueDate: "2025-04-02" }
+            - column: { name: rate, valueNumeric: 4 }
+            - column: { name: sessions_count, valueNumeric: 5 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 1 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Good listener." }
+            - column: { name: review_date, valueDate: "2025-04-03" }
+            - column: { name: rate, valueNumeric: 4 }
+            - column: { name: sessions_count, valueNumeric: 3 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 1 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Highly recommend!" }
+            - column: { name: review_date, valueDate: "2025-04-04" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 6 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 1 }
+            - column: { name: is_deleted, valueBoolean: false }
+
+      # User 1, Psychologist 2
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Fair, but not outstanding." }
+            - column: { name: review_date, valueDate: "2025-04-05" }
+            - column: { name: rate, valueNumeric: 3 }
+            - column: { name: sessions_count, valueNumeric: 2 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 2 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Sessions helped me cope." }
+            - column: { name: review_date, valueDate: "2025-04-06" }
+            - column: { name: rate, valueNumeric: 4 }
+            - column: { name: sessions_count, valueNumeric: 3 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 2 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Could be more engaged." }
+            - column: { name: review_date, valueDate: "2025-04-07" }
+            - column: { name: rate, valueNumeric: 3 }
+            - column: { name: sessions_count, valueNumeric: 2 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 2 }
+            - column: { name: is_deleted, valueBoolean: false }
+
+      # User 1, Psychologist 3
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Fantastic guidance." }
+            - column: { name: review_date, valueDate: "2025-04-08" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 5 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 3 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Supportive and wise." }
+            - column: { name: review_date, valueDate: "2025-04-09" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 6 }
+            - column: { name: user_id, valueNumeric: 1 }
+            - column: { name: psychologist_id, valueNumeric: 3 }
+            - column: { name: is_deleted, valueBoolean: false }
+
+      # User 2, Psychologist 1
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Decent session overall." }
+            - column: { name: review_date, valueDate: "2025-04-10" }
+            - column: { name: rate, valueNumeric: 4 }
+            - column: { name: sessions_count, valueNumeric: 3 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 1 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Improved my mindset." }
+            - column: { name: review_date, valueDate: "2025-04-11" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 4 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 1 }
+            - column: { name: is_deleted, valueBoolean: false }
+
+      # User 2, Psychologist 2
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Too generic for me." }
+            - column: { name: review_date, valueDate: "2025-04-12" }
+            - column: { name: rate, valueNumeric: 2 }
+            - column: { name: sessions_count, valueNumeric: 2 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 2 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "It was okay." }
+            - column: { name: review_date, valueDate: "2025-04-13" }
+            - column: { name: rate, valueNumeric: 3 }
+            - column: { name: sessions_count, valueNumeric: 3 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 2 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Could be better." }
+            - column: { name: review_date, valueDate: "2025-04-14" }
+            - column: { name: rate, valueNumeric: 2 }
+            - column: { name: sessions_count, valueNumeric: 2 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 2 }
+            - column: { name: is_deleted, valueBoolean: false }
+
+      # User 2, Psychologist 3
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Amazing, would return." }
+            - column: { name: review_date, valueDate: "2025-04-15" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 5 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 3 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Best therapist ever!" }
+            - column: { name: review_date, valueDate: "2025-04-16" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 6 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 3 }
+            - column: { name: is_deleted, valueBoolean: false }
+      - insert:
+          tableName: reviews
+          columns:
+            - column: { name: review_text, value: "Very insightful." }
+            - column: { name: review_date, valueDate: "2025-04-17" }
+            - column: { name: rate, valueNumeric: 5 }
+            - column: { name: sessions_count, valueNumeric: 4 }
+            - column: { name: user_id, valueNumeric: 2 }
+            - column: { name: psychologist_id, valueNumeric: 3 }
+            - column: { name: is_deleted, valueBoolean: false }
