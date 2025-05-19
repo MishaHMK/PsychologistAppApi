@@ -84,7 +84,7 @@ public class PaymentController {
 
     @GetMapping("create")
     @Operation(summary = "Create payment by url",
-            description = "Create payment entity with session based on booking data")
+            description = "Create payment entity as unauthorized user")
     public PaymentDto createPaymentFromUrl(@RequestParam Long bookingId) {
         return paymentService.save(new CreatePaymentDto().setBookingId(bookingId));
     }
