@@ -16,10 +16,10 @@ public class EmailService {
     private final JavaMailSender mailSender;
 
     @Value("${spring.mail.nickname}")
-    private String senderEmail;
+    private String senderName;
 
     @Value("${spring.mail.username}")
-    private String senderName;
+    private String senderEmail;
 
     public void sendHtmlEmail(String to, String subject, String htmlContent) {
         try {

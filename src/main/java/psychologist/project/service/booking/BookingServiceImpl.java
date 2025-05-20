@@ -119,6 +119,7 @@ public class BookingServiceImpl implements BookingService {
                         .plusMinutes(config.getSessionLength()))
                 .setStatus(Booking.BookingStatus.PENDING);
         bookingRepository.save(toCreate);
+        messageSenderService.onCreateBooking(toCreate);
         return bookingMapper.toDto(toCreate);
     }
 
