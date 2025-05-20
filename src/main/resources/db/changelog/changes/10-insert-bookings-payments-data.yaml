@@ -86,7 +86,7 @@ databaseChangeLog:
                   value: "https://meet.example.com/ghi789"
               - column:
                   name: status
-                  value: "PENDING"
+                  value: "CONFIRMED"
         - insert:
             tableName: bookings
             columns:
@@ -563,13 +563,13 @@ databaseChangeLog:
                   valueNumeric: '1'
               - column:
                   name: psychologist_id
-                  valueNumeric: '2'
+                  valueNumeric: '1'
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/ghi789"
               - column:
                   name: status
-                  value: "PENDING"
+                  value: "CONFIRMED"
         - insert:
             tableName: bookings
             columns:
@@ -590,7 +590,7 @@ databaseChangeLog:
                   value: "https://meet.example.com/ghi789"
               - column:
                   name: status
-                  value: "PENDING"
+                  value: "EXPIRED"
         - insert:
             tableName: bookings
             columns:
@@ -605,13 +605,13 @@ databaseChangeLog:
                   valueNumeric: '1'
               - column:
                   name: psychologist_id
-                  valueNumeric: '1'
+                  valueNumeric: '2'
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/ghi789"
               - column:
                   name: status
-                  value: "PENDING"
+                  value: "CONFIRMED"
         - insert:
             tableName: bookings
             columns:
@@ -626,13 +626,13 @@ databaseChangeLog:
                   valueNumeric: '1'
               - column:
                   name: psychologist_id
-                  valueNumeric: '2'
+                  valueNumeric: '3'
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/ghi789"
               - column:
                   name: status
-                  value: "PENDING"
+                  value: "CONFIRMED"
         - insert:
             tableName: bookings
             columns:
@@ -647,13 +647,13 @@ databaseChangeLog:
                   valueNumeric: '1'
               - column:
                   name: psychologist_id
-                  valueNumeric: '1'
+                  valueNumeric: '4'
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl012"
               - column:
                   name: status
-                  value: "EXPIRED"
+                  value: "CONFIRMED"
         - insert:
             tableName: bookings
             columns:
