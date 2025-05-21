@@ -45,6 +45,7 @@ public class SecurityConfig {
                                 antMatcher("/v3/api-docs/**"),
                                 antMatcher(HttpMethod.POST,"/payments"),
                                 antMatcher("/payments/success"),
+                                antMatcher("/payments/create/**"),
                                 antMatcher("/payments/cancel"),
                                 antMatcher("/bookings/unauthorized"),
                                 antMatcher("/bookings/free_spots/**"),

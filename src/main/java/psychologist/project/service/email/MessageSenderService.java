@@ -35,8 +35,7 @@ public class MessageSenderService {
         PsychologistWithDetailsDto psychologist = bookingData.getPsychologistDto();
         String cancelUrl = backendUrl + "api/payments/cancel?sessionId="
                 + paymentDto.getSessionId();
-        String html = "<p>&nbsp;</p>"
-                + "<p>Hi " + user.getFirstName() + "," + "</p>"
+        String html = "<p>Hi " + user.getFirstName() + "," + "</p>"
                 + "<p>&nbsp;</p>"
                 + "<p>Your payment has been created for booking</p>"
                 + "<p>&nbsp;</p>"
@@ -44,7 +43,7 @@ public class MessageSenderService {
                 + "  <li>Your Psychologist: " + psychologist.getFirstName() + " "
                 + psychologist.getFatherName() + " "
                 + psychologist.getLastName() + "</li>"
-                + "  <li>Date & Time:" + bookingData.getStartTime()
+                + "  <li>Date & Time: " + bookingData.getStartTime()
                                         .format(formatter) + "</li>"
                 + "  <li>Price: $" + psychologist.getSessionPrice() + "</li>"
                 + "</ul>"
@@ -64,15 +63,14 @@ public class MessageSenderService {
     public void onCancelPayment(BookingWithPsychologistInfoDto bookingData) {
         User user = receiveUser(bookingData.getUserId());
         PsychologistWithDetailsDto psychologist = bookingData.getPsychologistDto();
-        String html = "<p>&nbsp;</p>"
-                + "<p>Hi " + user.getFirstName() + "," + "</p>"
+        String html = "<p>Hi " + user.getFirstName() + "," + "</p>"
                 + "<p>&nbsp;</p>"
                 + "<p>Your meeting session on MindBloom has been canceled</p>"
                 + "<ul>"
                 + "  <li>Your Psychologist: " + psychologist.getFirstName() + " "
                 + psychologist.getFatherName() + " "
                 + psychologist.getLastName() + "</li>"
-                + "  <li>Date & Time:" + bookingData.getStartTime()
+                + "  <li>Date & Time: " + bookingData.getStartTime()
                                         .format(formatter) + "</li>"
                 + "</ul>"
                 + "<p>&nbsp;</p>"
@@ -87,17 +85,17 @@ public class MessageSenderService {
     public void onConfirmPayment(BookingWithPsychologistInfoDto bookingData) {
         User user = receiveUser(bookingData.getUserId());
         PsychologistWithDetailsDto psychologist = bookingData.getPsychologistDto();
-        String html = "<p>&nbsp;</p>"
-                + "<p>Hi " + user.getFirstName() + "," + "</p>"
+        String html = "<p>Hi " + user.getFirstName() + "," + "</p>"
                 + "<p>Thank you for booking a session on MindBloom. Here are the details: </p>"
                 + "<p>&nbsp;</p>"
                 + "<ul>"
                     + "  <li>Your Psychologist: " + psychologist.getFirstName() + " "
                     + psychologist.getFatherName() + " "
                     + psychologist.getLastName() + "</li>"
-                    + "  <li>Date & Time:" + bookingData.getStartTime()
+                    + "  <li>Date & Time: " + bookingData.getStartTime()
                                              .format(formatter) + "</li>"
-                    + "  <li>Session Link:" + bookingData.getMeetingUrl() + "</li>"
+                    + "  <li>Session Link: " + "<a href=" + bookingData.getMeetingUrl()
+                    + ">Meeting</a>" + "</li>"
                 + "</ul>"
                 + "<p>&nbsp;</p>"
                 + "<p>Take care, "
