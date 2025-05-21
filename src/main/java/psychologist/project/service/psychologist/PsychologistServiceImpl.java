@@ -5,10 +5,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import psychologist.project.dto.booking.PagedBookingDto;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
@@ -85,8 +87,9 @@ public class PsychologistServiceImpl implements PsychologistService {
             value = "psychologistSearchCache",
             keyGenerator = "filterPsychologistKeyGenerator"
     )
-    public List<PsychologistWithDetailsDto> search(PsychologistFilterDto filterDto,
-                                        Pageable pageable) {
+    @Override
+    public PagedBookingDto search(PsychologistFilterDto filterDto,
+                                  Pageable pageable) {
         Specification<Psychologist> spec = Specification.where(null);
 
         String firstName = filterDto.getFirstName();
@@ -131,10 +134,23 @@ public class PsychologistServiceImpl implements PsychologistService {
                     .hasApproachIds(approachIds));
         }
 
-        return psychologistRepository.findAll(spec, pageable)
+        Page<Psychologist> page = psychologistRepository.findAll(spec, pageable);
+
+        List<PsychologistWithDetailsDto> psychologistList =
+                page.getContent()
                 .stream()
                 .map(psychologistMapper::toDetailedDto)
                 .toList();
+
+        PagedBookingDto pagedBookingDto = new PagedBookingDto()
+                .setPsychologists(psychologistList)
+                .setCount((int) page.getTotalElements())
+                .setPageNumber(pageable.getPageNumber())
+                .setPageSize(pageable.getPageSize());
+
+        return pagedBookingDto.setTotalPages(
+                (int) Math.ceil((double) pagedBookingDto.getCount()
+                        / pagedBookingDto.getPageSize()));
     }
 
     private Speciality findSpecialityById(Long id) {

@@ -14,6 +14,7 @@ import psychologist.project.mapper.UserMapper;
 import psychologist.project.model.User;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
+import psychologist.project.service.email.MessageSenderService;
 
 @Transactional
 @Service
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final MessageSenderService messageSender;
 
     @Override
     public UserRegisterResponseDto save(UserRegisterRequestDto requestDto) {
@@ -37,7 +39,9 @@ public class UserServiceImpl implements UserService {
         } else {
             userRepository.save(user);
         }
-        return userMapper.toResponse(user);
+        UserRegisterResponseDto response = userMapper.toResponse(user);
+        messageSender.onRegistered(response);
+        return response;
     }
 
     @Override

@@ -41,13 +41,21 @@ public class ReviewController {
         return reviewService.save(psychologistId, createDto);
     }
 
-    @GetMapping("/specialist/{psychologistId}")
+    @GetMapping("/all/{psychologistId}")
     @Operation(summary = "Get all psychologist reviews",
             description = "Get all reviews by psychologist id")
     public List<ReviewDto> getAllReviewsForPsychologist(
             @PathVariable Long psychologistId,
             @ParameterObject Pageable pageable) {
         return reviewService.getAllReviewsForPsychologist(psychologistId, pageable);
+    }
+
+    @GetMapping("/review-page/{psychologistId}")
+    @Operation(summary = "Get reviews for psychologist page",
+            description = "Get most recent reviews of psychologist, no more than 6")
+    public List<ReviewDto> getAllReviewsForPsychologistPage(
+            @PathVariable Long psychologistId) {
+        return reviewService.getRecentReviewsForPsychologist(psychologistId);
     }
 
     @GetMapping("/{reviewId}")

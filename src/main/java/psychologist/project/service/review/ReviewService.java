@@ -10,6 +10,8 @@ public interface ReviewService {
 
     List<ReviewDto> getAllReviewsForPsychologist(Long psychologistId, Pageable pageable);
 
+    List<ReviewDto> getRecentReviewsForPsychologist(Long psychologistId);
+
     ReviewDto getReviewById(Long reviewId);
 
     void delete(Long id);

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import psychologist.project.dto.booking.PagedBookingDto;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
@@ -69,7 +70,7 @@ public class PsychologistController {
     @GetMapping("/filter")
     @Operation(summary = "Search for psychologist",
             description = "Filter psychologist data by given params")
-    public List<PsychologistWithDetailsDto> filterPsychologists(
+    public PagedBookingDto filterPsychologists(
             @ParameterObject PsychologistFilterDto filter,
             @ParameterObject Pageable pageable) {
         return psychologistService.search(filter, pageable);

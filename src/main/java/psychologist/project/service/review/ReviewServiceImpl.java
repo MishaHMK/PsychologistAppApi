@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,8 @@ import psychologist.project.service.booking.BookingService;
 @Transactional
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
+    private static final int reviewPageSize = 6;
+
     private final ReviewMapper reviewMapper;
     private final BookingService bookingService;
     private final ReviewRepository reviewRepository;
@@ -51,12 +54,22 @@ public class ReviewServiceImpl implements ReviewService {
     public List<ReviewDto> getAllReviewsForPsychologist(Long psychologistId, Pageable pageable) {
         return reviewRepository.findAllByPsychologistId(psychologistId, pageable)
                 .stream()
-                .map(review -> {
-                    return reviewMapper.toDto(review)
+                .map(review -> reviewMapper.toDto(review)
+                        .setReviewerAge(Period.between(review.getUser().getBirthDate(),
+                                LocalDate.now()).getYears())
+                        .setReviewerName(review.getUser().getFirstName()))
+                .toList();
+    }
+
+    @Override
+    public List<ReviewDto> getRecentReviewsForPsychologist(Long psychologistId) {
+        return reviewRepository.findLatestByPsychologistId(
+                psychologistId, PageRequest.of(0, reviewPageSize))
+                .stream()
+                .map(review -> reviewMapper.toDto(review)
                             .setReviewerAge(Period.between(review.getUser().getBirthDate(),
                                     LocalDate.now()).getYears())
-                            .setReviewerName(review.getUser().getFirstName());
-                })
+                            .setReviewerName(review.getUser().getFirstName()))
                 .toList();
     }
 
