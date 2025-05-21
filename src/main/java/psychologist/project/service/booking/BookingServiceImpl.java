@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,6 +60,9 @@ public class BookingServiceImpl implements BookingService {
                 .toList();
     }
 
+    @Cacheable(
+            value = "myBookingsCache"
+    )
     @Override
     public List<BookingWithPsychologistInfoDto> findAllMyBookings() {
         Long loggedInUserId = SecurityUtil.getLoggedInUserId();

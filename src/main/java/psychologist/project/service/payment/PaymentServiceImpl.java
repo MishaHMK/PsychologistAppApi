@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,9 @@ public class PaymentServiceImpl implements PaymentService {
                 .toList();
     }
 
+    @Cacheable(
+            value = "userPaymentsCache"
+    )
     @Override
     public List<PaymentDto> getAllByUserId(Pageable pageable, Long userId) {
         return paymentsRepository.findAllByUserId(userId, pageable)

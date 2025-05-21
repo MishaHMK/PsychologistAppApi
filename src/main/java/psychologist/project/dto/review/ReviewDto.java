@@ -1,12 +1,13 @@
 package psychologist.project.dto.review;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Accessors(chain = true)
 @Data
-public class ReviewDto {
+public class ReviewDto implements Serializable {
     private int id;
     private String reviewText;
     private String reviewerName;

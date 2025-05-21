@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,9 @@ public class ReviewServiceImpl implements ReviewService {
                 .toList();
     }
 
+    @Cacheable(
+            value = "recentReviewsCache"
+    )
     @Override
     public List<ReviewDto> getRecentReviewsForPsychologist(Long psychologistId) {
         return reviewRepository.findLatestByPsychologistId(
