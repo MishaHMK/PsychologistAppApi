@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -80,7 +81,10 @@ public class PsychologistServiceImpl implements PsychologistService {
         psychologistRepository.deleteById(id);
     }
 
-    @Override
+    @Cacheable(
+            value = "psychologistSearchCache",
+            keyGenerator = "filterPsychologistKeyGenerator"
+    )
     public List<PsychologistWithDetailsDto> search(PsychologistFilterDto filterDto,
                                         Pageable pageable) {
         Specification<Psychologist> spec = Specification.where(null);
