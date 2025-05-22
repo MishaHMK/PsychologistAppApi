@@ -16,8 +16,8 @@ public class FilterPsychologistKeyGenerator implements KeyGenerator {
         PsychologistFilterDto filter = (PsychologistFilterDto) params[0];
         Pageable pageable = (Pageable) params[1];
 
-        return String.format("filter:%s|%s|%s|%s|%s|concerns:%s" +
-                        "|approaches:%s|page:%d|size:%d|sort:%s",
+        return String.format("filter:%s|%s|%s|%s|%s|concerns:%s"
+                        + "|approaches:%s|page:%d|size:%d|sort:%s",
                 nullSafe(filter.getFirstName()),
                 nullSafe(filter.getGender()),
                 nullSafe(filter.getSpecialityId()),
