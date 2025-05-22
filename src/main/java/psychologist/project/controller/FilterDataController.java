@@ -35,7 +35,7 @@ public class FilterDataController {
     }
 
     @GetMapping("/specialities")
-    @Operation(summary = "Get all concerns",
+    @Operation(summary = "Get all specialities",
             description = "Receive all specialities data in system")
     public List<Speciality> getAllSpecialities() {
         return filterDataService.getAllSpecialities();

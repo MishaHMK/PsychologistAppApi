@@ -24,6 +24,7 @@ public class PsychologistWithDetailsDto {
     private String education;
     private String imageUrl;
     private String meetingUrl;
+    private Boolean isLiked;
     private Set<Concern> concerns;
     private Set<Approach> approaches;
 }

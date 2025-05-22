@@ -11,14 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import psychologist.project.dto.booking.PagedBookingDto;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
+import psychologist.project.dto.psychologist.PagedPsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
 import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
@@ -70,9 +71,26 @@ public class PsychologistController {
     @GetMapping("/filter")
     @Operation(summary = "Search for psychologist",
             description = "Filter psychologist data by given params")
-    public PagedBookingDto filterPsychologists(
+    public PagedPsychologistDto filterPsychologists(
             @ParameterObject PsychologistFilterDto filter,
             @ParameterObject Pageable pageable) {
         return psychologistService.search(filter, pageable);
+    }
+
+    @PatchMapping("/like/{id}")
+    @Operation(summary = "Like psychologist by id",
+            description = "Like psychologist by id / Remove like")
+    public PsychologistWithDetailsDto likePsychologist(
+            @PathVariable Long id) {
+        return psychologistService.likePsychologist(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @GetMapping("/liked")
+    @Operation(summary = "Get all liked psychologist",
+            description = "Get all liked psychologists by logged in user")
+    public PagedPsychologistDto getAllLikedPsychologists(
+            @ParameterObject Pageable pageable) {
+        return psychologistService.getAllLikedPsychologists(pageable);
     }
 }

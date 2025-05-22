@@ -23,6 +23,8 @@ public interface PsychologistMapper {
     @Mapping(source = "specialityId", target = "speciality", qualifiedByName = "specialityFromId")
     Psychologist toEntity(CreatePsychologistDto createDto);
 
+    Psychologist detailsToEntity(PsychologistWithDetailsDto createDto);
+
     @AfterMapping
     default void setApproachIds(@MappingTarget PsychologistDto psychologistDto,
                                 Psychologist psychologist) {

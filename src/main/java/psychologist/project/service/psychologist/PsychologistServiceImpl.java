@@ -2,24 +2,32 @@ package psychologist.project.service.psychologist;
 
 import jakarta.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import psychologist.project.dto.booking.PagedBookingDto;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
+import psychologist.project.dto.psychologist.PagedPsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistFilterDto;
 import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 import psychologist.project.mapper.PsychologistMapper;
 import psychologist.project.model.Psychologist;
 import psychologist.project.model.Speciality;
+import psychologist.project.model.User;
 import psychologist.project.repository.psychologist.PsychologistRepository;
 import psychologist.project.repository.psychologist.PsychologistSpecification;
 import psychologist.project.repository.psychologist.SpecialityRepository;
+import psychologist.project.repository.user.UserRepository;
+import psychologist.project.security.SecurityUtil;
 
 @Service
 @Transactional
@@ -28,6 +36,7 @@ public class PsychologistServiceImpl implements PsychologistService {
     private final PsychologistRepository psychologistRepository;
     private final PsychologistMapper psychologistMapper;
     private final SpecialityRepository specialityRepository;
+    private final UserRepository userRepository;
 
     @Override
     public PsychologistWithDetailsDto getPsychologist(Long id) {
@@ -70,6 +79,26 @@ public class PsychologistServiceImpl implements PsychologistService {
     }
 
     @Override
+    public PsychologistWithDetailsDto likePsychologist(Long id) {
+        PsychologistWithDetailsDto psychologist = getPsychologist(id);
+        User user = userRepository.getById(SecurityUtil.getLoggedInUserId());
+        Set<Psychologist> likedPsychologists = user.getLikedPsychologists();
+        Long targetId = psychologist.getId();
+        Optional<Psychologist> toRemove = likedPsychologists.stream()
+                .filter(p -> p.getId().equals(targetId))
+                .findFirst();
+        if (toRemove.isPresent()) {
+            likedPsychologists.remove(toRemove.get());
+            psychologist.setIsLiked(false);
+        } else {
+            likedPsychologists.add(psychologistMapper.detailsToEntity(psychologist));
+            psychologist.setIsLiked(true);
+        }
+        userRepository.save(user);
+        return psychologist;
+    }
+
+    @Override
     public List<PsychologistWithDetailsDto> getAllPsychologists(Pageable pageable) {
         return psychologistRepository.findAll(pageable)
                 .stream()
@@ -78,13 +107,88 @@ public class PsychologistServiceImpl implements PsychologistService {
     }
 
     @Override
+    public PagedPsychologistDto getAllLikedPsychologists(Pageable pageable) {
+        Long id = SecurityUtil.getLoggedInUserId();
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("User with id " + id + " not found")
+        );
+        List<PsychologistWithDetailsDto> fullList = user.getLikedPsychologists()
+                .stream()
+                .map(psychologistMapper::toDetailedDto)
+                .toList();
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<PsychologistWithDetailsDto> pageContent;
+
+        if (startItem >= fullList.size()) {
+            pageContent = Collections.emptyList();
+        } else {
+            int endIndex = Math.min(startItem + pageSize, fullList.size());
+            pageContent = fullList.subList(startItem, endIndex);
+        }
+
+        Page<PsychologistWithDetailsDto> page
+                = new PageImpl<>(pageContent, pageable, fullList.size());
+
+        return new PagedPsychologistDto()
+                .setPsychologists(page.getContent())
+                .setCount((int) page.getTotalElements())
+                .setPageNumber(page.getNumber())
+                .setPageSize(page.getSize())
+                .setTotalPages(page.getTotalPages());
+    }
+
+    @Override
     public void delete(Long id) {
         psychologistRepository.deleteById(id);
     }
 
     @Override
-    public PagedBookingDto search(PsychologistFilterDto filterDto,
+    public PagedPsychologistDto search(PsychologistFilterDto filterDto,
                                   Pageable pageable) {
+        Specification<Psychologist> spec = setUpSpecification(filterDto);
+        Page<Psychologist> page = psychologistRepository.findAll(spec, pageable);
+        Set<Long> likedIds = Set.of();
+        User user = userRepository.getById(SecurityUtil.getLoggedInUserId());
+        if (user != null) {
+            likedIds = user.getLikedPsychologists()
+                   .stream()
+                   .map(Psychologist::getId)
+                   .collect(Collectors.toSet());
+        }
+        Set<Long> finalLikedIds = likedIds;
+        List<PsychologistWithDetailsDto> psychologistList =
+                page.getContent()
+                        .stream()
+                        .map(p -> {
+                            PsychologistWithDetailsDto dto = psychologistMapper.toDetailedDto(p);
+                            dto.setIsLiked(finalLikedIds.contains(p.getId()));
+                            return dto;
+                        })
+                        .toList();
+
+        PagedPsychologistDto pagedBookingDto = new PagedPsychologistDto()
+                .setPsychologists(psychologistList)
+                .setCount((int) page.getTotalElements())
+                .setPageNumber(pageable.getPageNumber())
+                .setPageSize(pageable.getPageSize());
+
+        return pagedBookingDto.setTotalPages(
+                (int) Math.ceil((double) pagedBookingDto.getCount()
+                        / pagedBookingDto.getPageSize()));
+    }
+
+    private Speciality findSpecialityById(Long id) {
+        return specialityRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Speciality with id " + id + " not found")
+        );
+    }
+
+    private Specification<Psychologist> setUpSpecification(
+            PsychologistFilterDto filterDto
+    ) {
         Specification<Psychologist> spec = Specification.where(null);
 
         String firstName = filterDto.getFirstName();
@@ -129,28 +233,6 @@ public class PsychologistServiceImpl implements PsychologistService {
                     .hasApproachIds(approachIds));
         }
 
-        Page<Psychologist> page = psychologistRepository.findAll(spec, pageable);
-
-        List<PsychologistWithDetailsDto> psychologistList =
-                page.getContent()
-                .stream()
-                .map(psychologistMapper::toDetailedDto)
-                .toList();
-
-        PagedBookingDto pagedBookingDto = new PagedBookingDto()
-                .setPsychologists(psychologistList)
-                .setCount((int) page.getTotalElements())
-                .setPageNumber(pageable.getPageNumber())
-                .setPageSize(pageable.getPageSize());
-
-        return pagedBookingDto.setTotalPages(
-                (int) Math.ceil((double) pagedBookingDto.getCount()
-                        / pagedBookingDto.getPageSize()));
-    }
-
-    private Speciality findSpecialityById(Long id) {
-        return specialityRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Speciality with id " + id + " not found")
-        );
+        return spec;
     }
 }

@@ -15,7 +15,8 @@ public class SecurityUtil {
     }
 
     private static User getValidUserFromPrincipal() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
         if (principal.equals("anonymousUser")) {
             throw new SecurityException("You are not logged in");
         }

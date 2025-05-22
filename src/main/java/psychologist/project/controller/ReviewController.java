@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,12 +29,11 @@ import psychologist.project.service.review.ReviewService;
 public class ReviewController {
     private final ReviewService reviewService;
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
-    @Operation(summary = "Create new psychologist",
-            description = "Create psychologist with given data")
-    public ReviewDto createPsychologist(
+    @Operation(summary = "Create new review",
+            description = "Create review with given data")
+    public ReviewDto createReview(
             @Valid @RequestBody CreateReviewDto createDto,
             @RequestParam Long psychologistId) {
         return reviewService.save(psychologistId, createDto);
