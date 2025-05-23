@@ -114,7 +114,11 @@ public class PsychologistServiceImpl implements PsychologistService {
         );
         List<PsychologistWithDetailsDto> fullList = user.getLikedPsychologists()
                 .stream()
-                .map(psychologistMapper::toDetailedDto)
+                .map(p -> {
+                    PsychologistWithDetailsDto dto = psychologistMapper.toDetailedDto(p);
+                    dto.setIsLiked(true);
+                    return dto;
+                })
                 .toList();
 
         int pageSize = pageable.getPageSize();
