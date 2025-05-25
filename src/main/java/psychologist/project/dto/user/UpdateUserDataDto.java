@@ -1,7 +1,7 @@
 package psychologist.project.dto.user;
 
-import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import lombok.Data;
 
 @Data
