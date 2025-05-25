@@ -32,9 +32,12 @@ databaseChangeLog:
               - column:
                   name: father_name
                   type: varchar(255)
+              # - column:
+              #    name: image_url
+              #    type: varchar(255)
               - column:
-                  name: image_url
-                  type: varchar(255)
+                  name: profile_image
+                  type: blob
               - column:
                   name: password
                   type: varchar(255)

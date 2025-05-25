@@ -9,6 +9,7 @@ public class UpdateUserDataDto {
     private String firstName;
     private String lastName;
     private String fatherName;
-    private String imageUrl;
+    private byte[] profileImage;
+    //private String imageUrl;
     private LocalDate birthDate;
 }

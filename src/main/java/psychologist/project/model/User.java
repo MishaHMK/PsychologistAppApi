@@ -10,7 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -50,7 +52,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    private String imageUrl;
+    //private String imageUrl;
 
     private LocalDate birthDate;
 
@@ -68,6 +70,10 @@ public class User implements UserDetails {
     )
     @Where(clause = "is_deleted = false")
     private Set<Psychologist> likedPsychologists = new HashSet<>();
+
+    @Lob
+    @Column(name = "profile_image", columnDefinition = "BLOB")
+    private byte[] profileImage;
 
     /*@Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean isDeleted = false;*/
