@@ -8,8 +8,7 @@ public record UserDto(
         String firstName,
         String lastName,
         String fatherName,
-        //String imageUrl,
-        byte[] profileImage,
+        String imageUrl,
         LocalDate birthDate,
         String role) {
 }

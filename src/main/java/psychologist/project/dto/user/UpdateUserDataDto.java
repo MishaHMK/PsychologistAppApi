@@ -1,6 +1,5 @@
 package psychologist.project.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import lombok.Data;
 
@@ -10,8 +9,8 @@ public class UpdateUserDataDto {
     private String firstName;
     private String lastName;
     private String fatherName;
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private byte[] profileImage;
-    //private String imageUrl;
+    /* @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private byte[] profileImage; */
+    private String imageUrl;
     private LocalDate birthDate;
 }

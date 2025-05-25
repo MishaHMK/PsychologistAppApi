@@ -93,9 +93,7 @@ public class UserServiceImpl implements UserService {
         updateIfPresent(updateDto.getFirstName(), user::setFirstName);
         updateIfPresent(updateDto.getLastName(), user::setLastName);
         updateIfPresent(updateDto.getFatherName(), user::setFatherName);
-        if (updateDto.getProfileImage() != null) {
-            user.setProfileImage(updateDto.getProfileImage());
-        }
+        updateIfPresent(updateDto.getImageUrl(), user::setImageUrl);
         if (updateDto.getBirthDate() != null) {
             user.setBirthDate(updateDto.getBirthDate());
         }
