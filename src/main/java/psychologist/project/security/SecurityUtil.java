@@ -23,12 +23,12 @@ public class SecurityUtil {
         return (User) principal;
     }
 
-    public static User getValidUserIfAuthenticated() {
+    public static Long getValidUserIdIfAuthenticated() {
         Object principal = SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
         if (principal.equals("anonymousUser")) {
             return null;
         }
-        return (User) principal;
+        return ((User) principal).getId();
     }
 }
