@@ -37,7 +37,7 @@ databaseChangeLog:
               #    type: varchar(255)
               - column:
                   name: profile_image
-                  type: blob
+                  type: mediumblob
               - column:
                   name: password
                   type: varchar(255)

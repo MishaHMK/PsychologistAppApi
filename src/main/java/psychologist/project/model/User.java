@@ -71,7 +71,7 @@ public class User implements UserDetails {
     private Set<Psychologist> likedPsychologists = new HashSet<>();
 
     @Lob
-    @Column(name = "profile_image", columnDefinition = "BLOB")
+    @Column(name = "profile_image", columnDefinition = "MEDIUMBLOB")
     private byte[] profileImage;
 
     /*@Column(nullable = false, columnDefinition = "TINYINT(1)")
