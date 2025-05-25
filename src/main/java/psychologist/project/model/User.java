@@ -50,6 +50,8 @@ public class User implements UserDetails {
 
     private String password;
 
+    private String imageUrl;
+
     private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)

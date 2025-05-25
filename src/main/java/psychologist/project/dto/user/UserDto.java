@@ -8,6 +8,7 @@ public record UserDto(
         String firstName,
         String lastName,
         String fatherName,
+        String imageUrl,
         LocalDate birthDate,
         String role) {
 }

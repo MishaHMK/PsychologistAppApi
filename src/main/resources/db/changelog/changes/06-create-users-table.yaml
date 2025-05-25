@@ -33,6 +33,9 @@ databaseChangeLog:
                   name: father_name
                   type: varchar(255)
               - column:
+                  name: image_url
+                  type: varchar(255)
+              - column:
                   name: password
                   type: varchar(255)
               - column:
