@@ -68,7 +68,7 @@ public class PsychologistController {
         psychologistService.delete(id);
     }
 
-    @GetMapping("/filter-data")
+    @GetMapping("/filter")
     @Operation(summary = "Search for psychologist",
             description = "Filter psychologist data by given params")
     public PagedPsychologistDto filterPsychologists(
