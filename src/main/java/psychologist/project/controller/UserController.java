@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -45,7 +46,8 @@ public class UserController {
         return userService.updateUser(updateDto);
     }
 
-    @PatchMapping("update-image")
+    @PatchMapping(value = "update-image",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Update image",
             description = "Update currently logged in user image")
     public UserDto updateUserImage(@RequestParam MultipartFile profileImage)

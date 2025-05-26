@@ -109,6 +109,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateImage(byte[] imageData) {
         userRepository.updateUserImage(SecurityUtil.getLoggedInUserId(), imageData);
-        return getCurrentUserData();
+        UserDto userData = getCurrentUserData();
+        userData.setProfileImage(imageData);
+        return userData;
     }
 }
