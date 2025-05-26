@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -51,7 +50,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    //private String imageUrl;
+    private String imageUrl;
 
     private LocalDate birthDate;
 
@@ -61,9 +60,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Lob
+    /*@Lob
     @Column(name = "profile_image", columnDefinition = "MEDIUMBLOB")
-    private byte[] profileImage;
+    private byte[] profileImage;*/
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

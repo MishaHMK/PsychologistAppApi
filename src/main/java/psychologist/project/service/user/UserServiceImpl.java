@@ -1,11 +1,13 @@
 package psychologist.project.service.user;
 
 import jakarta.transaction.Transactional;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import psychologist.project.dto.auth.UserRegisterRequestDto;
 import psychologist.project.dto.auth.UserRegisterResponseDto;
 import psychologist.project.dto.booking.UnauthorizedBookingDto;
@@ -18,6 +20,7 @@ import psychologist.project.model.User;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
 import psychologist.project.service.email.MessageSenderService;
+import psychologist.project.service.storage.StorageService;
 
 @Transactional
 @Service
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
     private final MessageSenderService messageSender;
+    private final StorageService storageService;
 
     @Override
     public UserRegisterResponseDto save(UserRegisterRequestDto requestDto) {
@@ -108,9 +112,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateImage(byte[] imageData) {
-        userRepository.updateUserImage(SecurityUtil.getLoggedInUserId(), imageData);
+        //userRepository.updateUserImage(SecurityUtil.getLoggedInUserId(), imageData);
         UserDto userData = getCurrentUserData();
-        userData.setProfileImage(imageData);
+        //userData.setProfileImage(imageData);
+        return userData;
+    }
+
+    @Override
+    public UserDto updateImage(MultipartFile imageData) throws IOException {
+        String imageUrl = storageService.uploadImage(imageData);
+        userRepository.updateUserImageUrl(SecurityUtil.getLoggedInUserId(), imageUrl);
+        UserDto userData = getCurrentUserData();
+        userData.setImageUrl(imageUrl);
         return userData;
     }
 }

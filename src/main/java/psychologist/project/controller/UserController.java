@@ -52,6 +52,7 @@ public class UserController {
             description = "Update currently logged in user image")
     public UserDto updateUserImage(@RequestParam MultipartFile profileImage)
             throws IOException {
-        return userService.updateImage(profileImage.getBytes());
+        //return userService.updateImage(profileImage.getBytes());
+        return userService.updateImage(profileImage);
     }
 }
