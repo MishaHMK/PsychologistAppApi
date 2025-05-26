@@ -9,8 +9,5 @@ public class UpdateUserDataDto {
     private String firstName;
     private String lastName;
     private String fatherName;
-    /* @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private byte[] profileImage; */
-    private String imageUrl;
     private LocalDate birthDate;
 }

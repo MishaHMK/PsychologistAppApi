@@ -18,5 +18,7 @@ public interface UserService {
 
     UserDto updateUser(UpdateUserDataDto updateDto);
 
+    UserDto updateImage(byte[] imageData);
+
     void deleteUser();
 }

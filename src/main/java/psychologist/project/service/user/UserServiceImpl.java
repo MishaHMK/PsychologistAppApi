@@ -93,7 +93,6 @@ public class UserServiceImpl implements UserService {
         updateIfPresent(updateDto.getFirstName(), user::setFirstName);
         updateIfPresent(updateDto.getLastName(), user::setLastName);
         updateIfPresent(updateDto.getFatherName(), user::setFatherName);
-        updateIfPresent(updateDto.getImageUrl(), user::setImageUrl);
         if (updateDto.getBirthDate() != null) {
             user.setBirthDate(updateDto.getBirthDate());
         }
@@ -105,5 +104,11 @@ public class UserServiceImpl implements UserService {
         if (value != null && !value.isBlank()) {
             setter.accept(value);
         }
+    }
+
+    @Override
+    public UserDto updateImage(byte[] imageData) {
+        userRepository.updateUserImage(SecurityUtil.getLoggedInUserId(), imageData);
+        return getCurrentUserData();
     }
 }

@@ -85,7 +85,6 @@ public class PsychologistController {
         return psychologistService.likePsychologist(id);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/liked")
     @Operation(summary = "Get all liked psychologist",
             description = "Get all liked psychologists by logged in user")
