@@ -10,7 +10,8 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String fatherName;
-    private byte[] profileImage;
+    //private byte[] profileImage;
+    private String imageUrl;
     private LocalDate birthDate;
     private String role;
 }

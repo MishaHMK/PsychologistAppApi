@@ -1,5 +1,7 @@
 package psychologist.project.service.user;
 
+import java.io.IOException;
+import org.springframework.web.multipart.MultipartFile;
 import psychologist.project.dto.auth.UserRegisterRequestDto;
 import psychologist.project.dto.auth.UserRegisterResponseDto;
 import psychologist.project.dto.booking.UnauthorizedBookingDto;
@@ -19,6 +21,8 @@ public interface UserService {
     UserDto updateUser(UpdateUserDataDto updateDto);
 
     UserDto updateImage(byte[] imageData);
+
+    UserDto updateImage(MultipartFile imageData) throws IOException;
 
     void deleteUser();
 }
