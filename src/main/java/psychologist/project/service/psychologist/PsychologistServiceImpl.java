@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import psychologist.project.config.ImageConfig;
 import psychologist.project.dto.psychologist.CreatePsychologistDto;
 import psychologist.project.dto.psychologist.PagedPsychologistDto;
 import psychologist.project.dto.psychologist.PsychologistDto;
@@ -37,6 +38,7 @@ public class PsychologistServiceImpl implements PsychologistService {
     private final PsychologistMapper psychologistMapper;
     private final SpecialityRepository specialityRepository;
     private final UserRepository userRepository;
+    private final ImageConfig imageConfig;
 
     @Override
     public PsychologistWithDetailsDto getPsychologist(Long id) {
@@ -55,13 +57,13 @@ public class PsychologistServiceImpl implements PsychologistService {
                 || toCreate.getImageUrl().isEmpty()) {
             switch (toCreate.getGender()) {
                 case MALE:
-                    toCreate.setImageUrl("https://imgur.com/oOFnYdS.png");
+                    toCreate.setImageUrl(imageConfig.getDefaultMaleImg());
                     break;
                 case FEMALE:
-                    toCreate.setImageUrl("https://imgur.com/gBPz8KZ.png");
+                    toCreate.setImageUrl(imageConfig.getDefaultFemaleImg());
                     break;
                 default:
-                    toCreate.setImageUrl("https://imgur.com/5jWJsCD.png");
+                    toCreate.setImageUrl(imageConfig.getDefaultOtherImg());
                     break;
             }
         }
