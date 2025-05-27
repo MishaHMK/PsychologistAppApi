@@ -714,3 +714,22 @@ databaseChangeLog:
               - column:
                   name: amount
                   valueNumeric: '49.99'
+
+        - insert:
+            tableName: payments
+            columns:
+              - column:
+                  name: status
+                  value: PENDING
+              - column:
+                  name: booking_id
+                  valueNumeric: '26'
+              - column:
+                  name: session_url
+                  value: "https://example.com/session/pending"
+              - column:
+                  name: session_id
+                  value: "sess_pending_001"
+              - column:
+                  name: amount
+                  valueNumeric: '49.99'
