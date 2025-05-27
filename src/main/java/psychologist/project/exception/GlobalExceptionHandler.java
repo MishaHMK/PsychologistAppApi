@@ -1,6 +1,7 @@
 package psychologist.project.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -63,6 +64,13 @@ public class GlobalExceptionHandler {
             SecurityException ex) {
         return new ResponseEntity<>(buildExceptionResponse(ex),
                 HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<Map<String, Object>> handleInputOutputException(
+            IOException ex) {
+        return new ResponseEntity<>(buildExceptionResponse(ex),
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private Map<String, Object> buildExceptionResponse(Throwable ex) {

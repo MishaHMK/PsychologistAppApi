@@ -52,7 +52,7 @@ public class SecurityConfig {
                                 antMatcher("/bookings/lockedDates/**"),
                                 antMatcher("/reviews/review-page/**"),
                                 antMatcher(HttpMethod.GET, "/psychologists/**"),
-                                antMatcher(HttpMethod.GET, "/filter-data/**"))
+                                antMatcher(HttpMethod.GET, "/filter/**"))
                         .permitAll()
                         .anyRequest()
                         .authenticated()

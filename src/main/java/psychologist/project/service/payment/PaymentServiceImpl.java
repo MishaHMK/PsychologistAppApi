@@ -162,7 +162,7 @@ public class PaymentServiceImpl implements PaymentService {
         );
     }
 
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 * * * 1-5")
     public void markExpiredPayments() {
         List<Payment> paymentStream = paymentsRepository.findAllByStatus(
                 Payment.PaymentStatus.PENDING, null)

@@ -33,6 +33,12 @@ databaseChangeLog:
                   name: father_name
                   type: varchar(255)
               - column:
+                  name: image_url
+                  type: varchar(255)
+              # - column:
+              #    name: profile_image
+              #    type: MEDIUMBLOB
+              - column:
                   name: password
                   type: varchar(255)
               - column:
@@ -50,3 +56,29 @@ databaseChangeLog:
              #    defaultValueBoolean: false
              #     constraints:
              #        nullable: false
+
+        - createTable:
+            tableName: users_liked
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: psychologists_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: user_id
+                  baseTableName: users_liked
+                  constraintName: fk_users_liked
+                  referencedColumnNames: id
+                  referencedTableName: users
+              - addForeignKeyConstraint:
+                  baseColumnNames: psychologists_id
+                  baseTableName: users_liked
+                  constraintName: fk_liked_users
+                  referencedColumnNames: id
+                  referencedTableName: psychologists

@@ -1,14 +1,13 @@
-package psychologist.project.dto.booking;
+package psychologist.project.dto.psychologist;
 
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 
 @Data
 @Accessors(chain = true)
-public class PagedBookingDto implements Serializable {
+public class PagedPsychologistDto {
     private List<PsychologistWithDetailsDto> psychologists;
     private Integer count;
     private Integer pageNumber;

@@ -15,10 +15,20 @@ public class SecurityUtil {
     }
 
     private static User getValidUserFromPrincipal() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
         if (principal.equals("anonymousUser")) {
             throw new SecurityException("You are not logged in");
         }
         return (User) principal;
+    }
+
+    public static Long getValidUserIdIfAuthenticated() {
+        Object principal = SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        if (principal.equals("anonymousUser")) {
+            return null;
+        }
+        return ((User) principal).getId();
     }
 }

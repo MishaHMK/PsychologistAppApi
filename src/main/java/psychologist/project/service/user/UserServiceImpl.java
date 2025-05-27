@@ -1,20 +1,26 @@
 package psychologist.project.service.user;
 
 import jakarta.transaction.Transactional;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import psychologist.project.dto.auth.UserRegisterRequestDto;
 import psychologist.project.dto.auth.UserRegisterResponseDto;
 import psychologist.project.dto.booking.UnauthorizedBookingDto;
+import psychologist.project.dto.user.UpdateUserDataDto;
 import psychologist.project.dto.user.UserDto;
+import psychologist.project.exception.AccessException;
 import psychologist.project.exception.RegistrationException;
 import psychologist.project.mapper.UserMapper;
 import psychologist.project.model.User;
 import psychologist.project.repository.user.UserRepository;
 import psychologist.project.security.SecurityUtil;
 import psychologist.project.service.email.MessageSenderService;
+import psychologist.project.service.storage.StorageService;
 
 @Transactional
 @Service
@@ -24,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
     private final MessageSenderService messageSender;
+    private final StorageService storageService;
 
     @Override
     public UserRegisterResponseDto save(UserRegisterRequestDto requestDto) {
@@ -78,5 +85,45 @@ public class UserServiceImpl implements UserService {
     public void deleteUser() {
         User user = SecurityUtil.getLoggedInUser();
         userRepository.deleteById(user.getId());
+    }
+
+    @Override
+    public UserDto updateUser(UpdateUserDataDto updateDto) {
+        User user = userRepository.findById(SecurityUtil.getLoggedInUserId())
+                .orElseThrow(
+                        () -> new AccessException("You're not logged in")
+                );
+        updateIfPresent(updateDto.getEmail(), user::setEmail);
+        updateIfPresent(updateDto.getFirstName(), user::setFirstName);
+        updateIfPresent(updateDto.getLastName(), user::setLastName);
+        updateIfPresent(updateDto.getFatherName(), user::setFatherName);
+        if (updateDto.getBirthDate() != null) {
+            user.setBirthDate(updateDto.getBirthDate());
+        }
+        userRepository.save(user);
+        return userMapper.toUserDto(user);
+    }
+
+    private void updateIfPresent(String value, Consumer<String> setter) {
+        if (value != null && !value.isBlank()) {
+            setter.accept(value);
+        }
+    }
+
+    @Override
+    public UserDto updateImage(byte[] imageData) {
+        //userRepository.updateUserImage(SecurityUtil.getLoggedInUserId(), imageData);
+        UserDto userData = getCurrentUserData();
+        //userData.setProfileImage(imageData);
+        return userData;
+    }
+
+    @Override
+    public UserDto updateImage(MultipartFile imageData) throws IOException {
+        String imageUrl = storageService.uploadImage(imageData);
+        userRepository.updateUserImageUrl(SecurityUtil.getLoggedInUserId(), imageUrl);
+        UserDto userData = getCurrentUserData();
+        userData.setImageUrl(imageUrl);
+        return userData;
     }
 }
