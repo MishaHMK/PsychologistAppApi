@@ -51,6 +51,9 @@ public class ReviewServiceImpl implements ReviewService {
         return dto;
     }
 
+    @Cacheable(
+            value = "allReviewsCache"
+    )
     @Override
     public List<ReviewDto> getAllReviewsForPsychologist(Long psychologistId, Pageable pageable) {
         return reviewRepository.findAllByPsychologistId(psychologistId, pageable)
