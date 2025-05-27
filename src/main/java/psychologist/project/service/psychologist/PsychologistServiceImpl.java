@@ -157,8 +157,11 @@ public class PsychologistServiceImpl implements PsychologistService {
         Specification<Psychologist> spec = setUpSpecification(filterDto);
         Page<Psychologist> page = psychologistRepository.findAll(spec, pageable);
         Set<Long> likedIds = Set.of();
-        Optional<User> user = userRepository
-                .findById(SecurityUtil.getValidUserIdIfAuthenticated());
+        Long userId = SecurityUtil.getValidUserIdIfAuthenticated();
+        Optional<User> user = Optional.empty();
+        if (userId != null) {
+            user = userRepository.findById(userId);
+        }
         if (user.isPresent()) {
             likedIds = user.get().getLikedPsychologists()
                    .stream()
