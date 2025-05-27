@@ -1,6 +1,5 @@
 package psychologist.project.dto.psychologist;
 
-import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
