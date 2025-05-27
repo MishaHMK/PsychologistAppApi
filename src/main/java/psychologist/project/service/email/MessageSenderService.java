@@ -126,10 +126,9 @@ public class MessageSenderService {
 
     @Async
     public void onRegistered(UserRegisterResponseDto userData) {
-        User user = receiveUser(userData.getId());
         String html = "<html>"
                 + "<body>"
-                + "<p>Hi " + user.getFirstName() + "," + "</p>"
+                + "<p>Hi " + userData.getFirstName() + "," + "</p>"
                 + "<p>&nbsp;</p>"
                 + "<p>We’re so glad you’ve joined MindBloom — a safe and supportive space<br>"
                 + "for your mental well-being.</p>"
@@ -147,7 +146,7 @@ public class MessageSenderService {
                 + "</body>"
                 + "</html>";
 
-        emailService.sendHtmlEmail(user.getEmail(), "Welcome to MindBloom", html);
+        emailService.sendHtmlEmail(userData.getEmail(), "Welcome to MindBloom", html);
     }
 
     private User receiveUser(Long userId) {
