@@ -12,7 +12,6 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("ALL")
 @Component
 public class JwtUtil {
     private final Key secret;
