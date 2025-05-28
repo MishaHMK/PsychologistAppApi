@@ -60,10 +60,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /*@Lob
-    @Column(name = "profile_image", columnDefinition = "MEDIUMBLOB")
-    private byte[] profileImage;*/
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_liked",

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import psychologist.project.config.BookingConfig;
+import psychologist.project.dto.booking.BookingWithPsychologistInfoDto;
 import psychologist.project.dto.payment.CreatePaymentDto;
 import psychologist.project.dto.payment.PaymentDto;
 import psychologist.project.dto.payment.PaymentPsychologistDto;
+import psychologist.project.service.booking.BookingService;
 import psychologist.project.service.payment.PaymentService;
 
 @Tag(name = "Payment controller",
@@ -29,7 +31,7 @@ import psychologist.project.service.payment.PaymentService;
 @RequestMapping("/payments")
 public class PaymentController {
     private final PaymentService paymentService;
-
+    private final BookingService bookingService;
     private final BookingConfig bookingConfig;
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -67,7 +69,6 @@ public class PaymentController {
         return new RedirectView(bookingConfig.getRedirect() + cancel.getPsychologistId());
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @PatchMapping("/update/{paymentId}")
     @Operation(summary = "Renew payment",
             description = "Renew expired payment")
@@ -82,10 +83,13 @@ public class PaymentController {
         return paymentService.save(createPaymentDto);
     }
 
-    @GetMapping("create")
+    @GetMapping("/create")
     @Operation(summary = "Create payment by url",
             description = "Create payment entity as unauthorized user")
-    public PaymentDto createPaymentFromUrl(@RequestParam Long bookingId) {
-        return paymentService.save(new CreatePaymentDto().setBookingId(bookingId));
+    public RedirectView createPaymentFromUrl(@RequestParam Long bookingId) {
+        paymentService.save(new CreatePaymentDto().setBookingId(bookingId));
+        BookingWithPsychologistInfoDto bookingDto = bookingService.getBookingDetailsById(bookingId);
+        return new RedirectView(bookingConfig.getRedirect()
+                + bookingDto.getPsychologistDto().getId());
     }
 }
