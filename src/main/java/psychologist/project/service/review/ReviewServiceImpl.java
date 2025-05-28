@@ -59,7 +59,8 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.findAllByPsychologistId(psychologistId, pageable)
                 .stream()
                 .map(review -> reviewMapper.toDto(review)
-                        .setReviewerAge(Period.between(review.getUser().getBirthDate(),
+                        .setReviewerAge(review.getUser().getBirthDate() == null ? null
+                                : Period.between(review.getUser().getBirthDate(),
                                 LocalDate.now()).getYears())
                         .setReviewerName(review.getUser().getFirstName()))
                 .toList();
@@ -71,9 +72,10 @@ public class ReviewServiceImpl implements ReviewService {
                 psychologistId, PageRequest.of(0, reviewPageSize))
                 .stream()
                 .map(review -> reviewMapper.toDto(review)
-                            .setReviewerAge(Period.between(review.getUser().getBirthDate(),
-                                    LocalDate.now()).getYears())
-                            .setReviewerName(review.getUser().getFirstName()))
+                        .setReviewerAge(review.getUser().getBirthDate() == null ? null
+                                : Period.between(review.getUser().getBirthDate(),
+                                LocalDate.now()).getYears())
+                        .setReviewerName(review.getUser().getFirstName()))
                 .toList();
     }
 
@@ -81,7 +83,8 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDto getReviewById(Long reviewId) {
         Review firstById = reviewRepository.findFirstById(reviewId);
         return reviewMapper.toDto(firstById)
-                .setReviewerAge(Period.between(firstById.getUser().getBirthDate(),
+                .setReviewerAge(firstById.getUser().getBirthDate() == null ? null
+                        : Period.between(firstById.getUser().getBirthDate(),
                         LocalDate.now()).getYears())
                 .setReviewerName(firstById.getUser().getFirstName());
     }
