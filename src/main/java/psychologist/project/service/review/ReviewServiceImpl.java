@@ -45,8 +45,12 @@ public class ReviewServiceImpl implements ReviewService {
                 .setReviewDate(LocalDate.now());
         reviewRepository.save(review);
         ReviewDto dto = reviewMapper.toDto(review);
-        dto.setReviewerAge(Period.between(loggedInUser.getBirthDate(),
-                LocalDate.now()).getYears())
+        Integer userAge = null;
+        if (loggedInUser.getBirthDate() != null) {
+            userAge = Period.between(loggedInUser.getBirthDate(),
+                    LocalDate.now()).getYears();
+        }
+        dto.setReviewerAge(userAge)
                 .setReviewerName(loggedInUser.getFirstName());
         return dto;
     }
