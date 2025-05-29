@@ -134,7 +134,7 @@ databaseChangeLog:
                   value: "0661212122"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/male_gender.png"
+                  value: "https://imgur.com/wl9JRpA.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl011"
@@ -179,7 +179,7 @@ databaseChangeLog:
                   value: "0661212123"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/female_gender.png"
+                  value: "https://imgur.com/I6EnNsF.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl012"
@@ -224,7 +224,7 @@ databaseChangeLog:
                   value: "0661212124"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/female_gender.png"
+                  value: "https://imgur.com/uInhXrt.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl013"
@@ -275,7 +275,7 @@ databaseChangeLog:
                   value: "https://meet.example.com/jkl014"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/male_gender.png"
+                  value: "https://imgur.com/8zLOEdR.png"
               - column:
                   name: languages
                   value: "English, Hindi, Tamil"
@@ -314,7 +314,7 @@ databaseChangeLog:
                   value: "0689988776"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/female_gender.png"
+                  value: "https://imgur.com/3hlwZ8g.png"
               - column:
                   name: meeting_url
                   value: "https://meet.example.com/jkl015"
@@ -365,7 +365,7 @@ databaseChangeLog:
                   value: "https://meet.example.com/jkl016"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/other_gender.png"
+                  value: "https://imgur.com/YjPSFS3.png"
               - column:
                   name: languages
                   value: "English, Japanese, Korean"
@@ -407,7 +407,7 @@ databaseChangeLog:
                   value: "https://meet.example.com/jkl017"
               - column:
                   name: image_url
-                  value: "https://mindbloomapi.s3.eu-north-1.amazonaws.com/avatars/other_gender.png"
+                  value: "https://imgur.com/5jWJsCD.png"
               - column:
                   name: languages
                   value: "English, Portuguese, Spanish"
