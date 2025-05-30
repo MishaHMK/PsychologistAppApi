@@ -58,8 +58,11 @@ Here, you can see the [UI (React)](https://github.com/taniavozniuk/Psychologist-
 | Redis (Lettuce) | Caching of paginated data for quick access          |
 
 **Deployment:**
+| Tool      | Description                                              |
+|-----------|-----------------------------------------------------------|
 | Docker    | Platform for project packaging and deployment             |
-| AWS       |                                                           |
+| AWS       | Platform to deploy Java project, Database and Redis       |
+| Namecheap | Source of domain                                          | 
 
 
 ## :computer: **How to run the project on Windows**
