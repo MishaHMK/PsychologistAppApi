@@ -1,4 +1,10 @@
-Java Spring Boot backend API of online system for searching psychologists and byuing their service
+## :brain: **Therapist Booking App "Project MindBloom"** 💮:
+
+Java Spring Boot backend API of online system for searching therapists and booking their services
+
+This project is the Backend part of a team project at Mate Academy
+ 
+Here, you can see the [UI (React)](https://github.com/taniavozniuk/Psychologist-Search-Service) designed by my talented teammates
 
 ## :computer: **How to run the project on Windows**
 1. Download [Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) and [Maven](https://maven.apache.org/install.html).
