@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -81,6 +82,7 @@ public class PsychologistServiceImpl implements PsychologistService {
         return dto.setSpeciality(findSpecialityById(createDto.getSpecialityId()));
     }
 
+    @CacheEvict(value = "psychologistSearchCache", allEntries = true)
     @Override
     public PsychologistWithDetailsDto likePsychologist(Long id) {
         PsychologistWithDetailsDto psychologist = getPsychologist(id);
@@ -101,9 +103,6 @@ public class PsychologistServiceImpl implements PsychologistService {
         return psychologist;
     }
 
-    @Cacheable(
-            value = "allPsychologistsCache"
-    )
     @Override
     public List<PsychologistWithDetailsDto> getAllPsychologists(Pageable pageable) {
         return psychologistRepository.findAll(pageable)

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final BookingService bookingService;
     private final ReviewRepository reviewRepository;
 
+    @CacheEvict(value = {"recentReviewsCache", "allReviewsCache"}, allEntries = true)
     @Override
     public ReviewDto save(Long psychologistId, CreateReviewDto createReviewDto) {
         Review review = reviewMapper.toEntity(createReviewDto);

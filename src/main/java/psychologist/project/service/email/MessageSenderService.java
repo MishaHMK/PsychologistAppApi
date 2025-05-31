@@ -113,7 +113,7 @@ public class MessageSenderService {
                 + "<p>&nbsp;</p>"
                 + "<p>Your meeting session on MindBloom has been created</p>"
                 + "<ul>"
-                + "  <li>Date & Time:" + bookingData.getStartTime()
+                + "  <li>Date & Time: " + bookingData.getStartTime()
                                           .format(formatter) + "</li>"
                 + "</ul>"
                 + "<p>&nbsp;</p>"
