@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final BookingService bookingService;
     private final ReviewRepository reviewRepository;
 
+    @CacheEvict(value = {"recentReviewsCache", "allReviewsCache"}, allEntries = true)
     @Override
     public ReviewDto save(Long psychologistId, CreateReviewDto createReviewDto) {
         Review review = reviewMapper.toEntity(createReviewDto);
@@ -54,6 +57,9 @@ public class ReviewServiceImpl implements ReviewService {
         return dto;
     }
 
+    @Cacheable(
+            value = "allReviewsCache"
+    )
     @Override
     public List<ReviewDto> getAllReviewsForPsychologist(Long psychologistId, Pageable pageable) {
         return reviewRepository.findAllByPsychologistId(psychologistId, pageable)
@@ -66,16 +72,19 @@ public class ReviewServiceImpl implements ReviewService {
                 .toList();
     }
 
+    @Cacheable(
+            value = "recentReviewsCache"
+    )
     @Override
     public List<ReviewDto> getRecentReviewsForPsychologist(Long psychologistId) {
         return reviewRepository.findLatestByPsychologistId(
                 psychologistId, PageRequest.of(0, reviewPageSize))
                 .stream()
                 .map(review -> reviewMapper.toDto(review)
-                        .setReviewerAge(review.getUser().getBirthDate() == null ? null
-                                : Period.between(review.getUser().getBirthDate(),
-                                LocalDate.now()).getYears())
-                        .setReviewerName(review.getUser().getFirstName()))
+                            .setReviewerAge(review.getUser().getBirthDate() == null ? null
+                                    : Period.between(review.getUser().getBirthDate(),
+                                    LocalDate.now()).getYears())
+                            .setReviewerName(review.getUser().getFirstName()))
                 .toList();
     }
 

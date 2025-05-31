@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+    ports:
+      - "${MYSQLDB_DOCKER_PORT}:${MYSQLDB_LOCAL_PORT}"
+
+  app:
+    depends_on:
+      - mysql
+      - redis
+    image: psychologist-app
+    build: .
+    env_file: ./.env
+    restart: on-failure
+    ports:
+      - "${SPRING_DOCKER_PORT}:${SPRING_LOCAL_PORT}"
+      - "${DEBUG_PORT}:${DEBUG_PORT}"
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQLDB_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${MYSQLDB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:${DEBUG_PORT}"
+      JWT_SECRET: "$JWT_SECRET"
+      STRIPE_API_KEY: "$STRIPE_API_KEY"
+    command: ["sh", "-c", "wait-for-it.sh mysql:3306 redis:6379 -- java -jar /app.jar"]

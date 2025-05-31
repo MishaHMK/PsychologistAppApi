@@ -114,7 +114,7 @@ public class BookingController {
     @Operation(summary = "Cancel booking by id",
             description = "Set booking status cancelled")
     public BookingDto cancelBooking(@PathVariable Long bookingId) {
-        //paymentService.cancelPaymentForBooking(bookingId);
+        paymentService.cancelPaymentForBooking(bookingId);
         return bookingService.setBookingStatusCancelled(bookingId);
     }
 }

@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,7 @@ public class PaymentServiceImpl implements PaymentService {
     public static final String SESSION_COMPLETE_STATUS = "complete";
     public static final String SESSION_OPEN_STATUS = "open";
     public static final String SESSION_EXPIRED_STATUS = "expired";
+    private static final Logger log = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
     private final BookingService bookingService;
     private final StripeUtil stripeUtil;
@@ -205,6 +208,7 @@ public class PaymentServiceImpl implements PaymentService {
         try {
             return stripeUtil.createSession(totalAmount, "payment");
         } catch (StripeException e) {
+            log.error("StripeException creating session: status={}, message={}", e.getStatusCode(), e.getMessage(), e);
             throw new PaymentException("Can't create payment session");
         }
     }

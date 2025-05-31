@@ -1,5 +1,6 @@
 package psychologist.project.dto.psychologist;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 import lombok.Data;
@@ -8,7 +9,7 @@ import psychologist.project.model.Concern;
 import psychologist.project.model.Speciality;
 
 @Data
-public class PsychologistWithDetailsDto {
+public class PsychologistWithDetailsDto implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;

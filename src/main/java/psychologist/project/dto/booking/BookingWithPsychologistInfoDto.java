@@ -1,5 +1,6 @@
 package psychologist.project.dto.booking;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -7,7 +8,7 @@ import psychologist.project.dto.psychologist.PsychologistWithDetailsDto;
 
 @Data
 @Accessors(chain = true)
-public class BookingWithPsychologistInfoDto {
+public class BookingWithPsychologistInfoDto implements Serializable {
     private Long id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
