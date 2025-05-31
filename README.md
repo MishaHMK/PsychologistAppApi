@@ -4,7 +4,7 @@ Java Spring Boot backend API of online system for searching therapists and booki
 
 This project is the Backend part of a team project at Mate Academy
  
-🎨: Here, you can see the [UI (React)](https://github.com/taniavozniuk/Psychologist-Search-Service) designed by my talented teammates
+## 🎨: Here, you can see the [UI (React)](https://github.com/taniavozniuk/Psychologist-Search-Service) designed by my talented teammates
 
 ## :mag_right: **Project Overview**
 
