@@ -64,8 +64,10 @@ This project is the Backend part of a team project at Mate Academy
 | Docker    | Platform for project packaging and deployment             |
 | AWS       | Platform to deploy Java project, Database and Redis       |
 | AWS S3    | Contains images of user profiles and psychologist pages   |
-| AWS | Source of domain with SSL sertificate                     | 
-
+| AWS EC2   | Virtual machine to run composed docker image of project   | 
+| AWS RDS   | Database service for deployed project                     | 
+| AWS ECR | Docker contatiner registry to receive images for EC2                     | 
+| AWS Route 53 | Connects EC2 IP to domain                    | 
 
 ## :computer: **How to run the project on Windows**
 1. Download [Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) and [Maven](https://maven.apache.org/install.html).
