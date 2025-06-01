@@ -34,6 +34,7 @@ This project is the Backend part of a team project at Mate Academy
 | Spring Data JPA     | Simplifies database access operations using JPA and ORM         |
 | Spring Boot Security   | Provides authentication and authorization capabilities       |
 | Spring Boot Validation | Ready-to-use collection of data constraints/checks           |
+| Spting Boot Mail       | Library to integrate mail sending                      |
 
 **Data storage and access:**
 | Tool        | Description                                                   |
@@ -45,9 +46,8 @@ This project is the Backend part of a team project at Mate Academy
 **External functional API:**
 | Tool        | Description                                                |
 |-------------|------------------------------------------------------------|
-| Spting Boot Mail | Library to integrate mail sending                      |
 | Stripe API | Library to integrate Stripe payment functions to API project |
-
+| Gmail API  | Toolking to manage mail sending via SMTP protocol  |    
 
 **Additional libs and tools:**
  | Tool      | Description                                              |
@@ -62,7 +62,7 @@ This project is the Backend part of a team project at Mate Academy
 | Tool      | Description                                               |
 |-----------|-----------------------------------------------------------|
 | Docker    | Platform for project packaging and deployment             |
-| Namecheap | Source of domain with SSL sertificate (Nginx on EC2 VM)   |
+| Namecheap | Source of domain with SSL certificate (Nginx on EC2 VM)   |
 | AWS       | Platform to deploy Java project, Database and Redis       |
 | AWS S3    | Contains images of user profiles and psychologist pages   |
 | AWS EC2   | Virtual machine to run composed docker image of project   | 
