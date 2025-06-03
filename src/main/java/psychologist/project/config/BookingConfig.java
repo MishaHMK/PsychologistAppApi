@@ -32,8 +32,11 @@ public class BookingConfig {
 
     private List<DayOfWeek> workingDays;
 
-    @Value("${payment.redirect}")
-    private String redirect;
+    @Value("${payment.redirect.authorized}")
+    private String authorizedRedirect;
+
+    @Value("${payment.redirect.unauthorized}")
+    private String unauthorizedRedirect;
 
     @PostConstruct
     public void init() {
