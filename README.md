@@ -1,10 +1,12 @@
-## :brain: **Therapist Booking App "Project MindBloom"** 💮:
+## :brain: **Therapist Booking App "Project MindBloom"** 💮
 
 Java Spring Boot backend API of online system for searching therapists and booking their services
 
 This is the Backend part of a team project at Mate Academy
- 
-## 🎨: Here, you can see the [UI (React)](https://github.com/taniavozniuk/Psychologist-Search-Service) designed by my talented teammates
+
+## 🎨  Here you can see the key parts of the system, crafted by my talented teammates
+  - [Client part of the project (React)](https://github.com/taniavozniuk/Psychologist-Search-Service) 
+  - [FigmaJam development board](https://www.figma.com/board/dLSKiKU8Il18s0TCn3MXLg/mental-health?node-id=0-1&t=dd4uuKOUetJx9qz8-1) (link to UI assets in the end of document)
 
 ## :mag_right: **Project Overview**
 
