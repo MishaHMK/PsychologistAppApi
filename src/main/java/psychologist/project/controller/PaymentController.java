@@ -59,12 +59,11 @@ public class PaymentController {
             description = "Confirm payment with given session")
     public RedirectView confirmPayment(@RequestParam(required = false) String sessionId) {
         PaymentPsychologistDto success = paymentService.success(sessionId);
-        if (SecurityUtil.getLoggedInUserId() == null) {
+        if (SecurityUtil.getValidUserIdIfAuthenticated() == null) {
             return new RedirectView(bookingConfig.getUnauthorizedRedirect()
                     + success.getPsychologistId());
         } else {
-            return new RedirectView(bookingConfig.getAuthorizedRedirect()
-                    + success.getPsychologistId());
+            return new RedirectView(bookingConfig.getAuthorizedRedirect());
         }
     }
 
@@ -73,12 +72,11 @@ public class PaymentController {
             description = "Cancel payment with given session")
     public RedirectView cancelPayment(@RequestParam(required = false) String sessionId) {
         PaymentPsychologistDto cancel = paymentService.cancel(sessionId);
-        if (SecurityUtil.getLoggedInUserId() == null) {
+        if (SecurityUtil.getValidUserIdIfAuthenticated() == null) {
             return new RedirectView(bookingConfig.getUnauthorizedRedirect()
                     + cancel.getPsychologistId());
         } else {
-            return new RedirectView(bookingConfig.getAuthorizedRedirect()
-                    + cancel.getPsychologistId());
+            return new RedirectView(bookingConfig.getAuthorizedRedirect());
         }
     }
 

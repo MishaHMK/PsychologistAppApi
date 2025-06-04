@@ -77,7 +77,7 @@ public class BookingController {
     }
 
     @GetMapping("/my")
-    @Operation(summary = "Get all today booked meetings",
+    @Operation(summary = "Get all users booked meetings",
             description = "Receive all bookings of "
                     + "authorized user")
     public List<BookingWithPsychologistInfoDto> getAllMyBookings() {

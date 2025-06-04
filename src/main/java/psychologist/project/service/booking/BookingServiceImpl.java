@@ -9,6 +9,7 @@ import java.time.Month;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -65,6 +66,9 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.findAllUserMeetings(loggedInUserId)
                 .stream()
                 .map(bookingMapper::toDetailedDto)
+                .sorted(Comparator
+                        .comparing(BookingWithPsychologistInfoDto::getStartTime).reversed()
+                )
                 .toList();
     }
 
